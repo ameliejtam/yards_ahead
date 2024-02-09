@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-//hoiuytr
-
 void main() {
   runApp(const MyApp());
 }
