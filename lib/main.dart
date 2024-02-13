@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
-  var current = WordPair.random();
+  // var current = WordPair.random();
+  var current = 'This is our app';
 }
 
 class MyHomePage extends StatelessWidget {
@@ -37,8 +38,9 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Text('YARDS AHEADDDDDD'),
-          Text(appState.current.asLowerCase),
+          Text('YARDS AHEAD'),
+          // Text(appState.current.asLowerCase),
+          Text(appState.current),
 
           ElevatedButton (
             onPressed: () {
