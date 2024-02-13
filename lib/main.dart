@@ -27,30 +27,52 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
-  // var current = WordPair.random();
-  var current = 'This is our app';
+  var current = WordPair.random();
+
+  void getNext() {
+    current = WordPair.random(); 
+    notifyListeners();
+  }
 }
 
 class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
+    var pair = appState.current;
 
     return Scaffold(
       body: Column(
         children: [
           Text('YARDS AHEAD'),
-          // Text(appState.current.asLowerCase),
-          Text(appState.current),
+          BigCard(pair: pair),
 
+          // add a button 
           ElevatedButton (
             onPressed: () {
-              print('button pressed!');
+              appState.getNext();
           },
           child: Text('Next'),
           )
 
         ],
       ),
+    );
+  }
+}
+
+class BigCard extends StatelessWidget {
+  const BigCard({
+    super.key,
+    required this.pair,
+  });
+
+  final WordPair pair;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(pair.asPascalCase),
     );
   }
 }
