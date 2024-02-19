@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(164, 195, 133, 1)),
+          scaffoldBackgroundColor: const Color.fromRGBO(164, 195, 133, 1),
         ),
         home: MyHomePage(),
       ),
@@ -73,9 +74,17 @@ class BigCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(pair.asPascalCase),
+    final theme = Theme.of(context);
+    final style = theme.textTheme.displayMedium!.copyWith(
+      color: Color.fromRGBO(108, 129, 88, 1),
+    );
+
+    return Card(
+      // color: Color.fromRGBO(243, 251, 236, 1),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Text(pair.asPascalCase, style: style),
+      ),
     );
   }
 }
