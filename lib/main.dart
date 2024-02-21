@@ -18,8 +18,7 @@ class MyApp extends StatelessWidget {
         title: 'Namer App',
         theme: ThemeData(
           useMaterial3: true,
-          //colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(164, 195, 133, 1)),
-          colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(252, 1, 1, 1)),
+          colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(164, 195, 133, 1)),
           scaffoldBackgroundColor: const Color.fromRGBO(164, 195, 133, 1),
         ),
         home: MyHomePage(),
@@ -37,7 +36,6 @@ class MyAppState extends ChangeNotifier {
   }
 }
 
-// ...
 
 class MyHomePage extends StatelessWidget {
   @override
@@ -47,14 +45,17 @@ class MyHomePage extends StatelessWidget {
 
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,  // ← Add this.
+        mainAxisAlignment: MainAxisAlignment.center, 
         children: [
           Text('A random AWESOME idea:'),
           BigCard(pair: pair),
-          ElevatedButton(
-            onPressed: () {
+          ElevatedButton( 
+            onPressed: () { 
               appState.getNext();
-            },
+            }, 
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color.fromRGBO(243, 251, 236, 1), 
+            ),
             child: Text('Next'),
           ),
         ],
@@ -81,7 +82,7 @@ class BigCard extends StatelessWidget {
     );
 
     return Card(
-      // color: Color.fromRGBO(243, 251, 236, 1),
+      color: Color.fromRGBO(243, 251, 236, 1),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Text(pair.asPascalCase, style: style),
