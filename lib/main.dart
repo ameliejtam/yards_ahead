@@ -33,6 +33,19 @@ class MyAppState extends ChangeNotifier {
   void getNext() {
     current = WordPair.random(); 
     notifyListeners();
+  } 
+
+  // adding functionality tutorial 
+  var favorites = <WordPair>[];
+
+  void toggleFavorite() {
+    if (favorites.contains(current)) {
+      favorites.remove(current);
+    } 
+    else {
+      favorites.add(current);
+    }
+    notifyListeners();
   }
 }
 
@@ -43,22 +56,52 @@ class MyHomePage extends StatelessWidget {
     var appState = context.watch<MyAppState>();
     var pair = appState.current;
 
+    // like button 
+    IconData icon;
+    if (appState.favorites.contains(pair)) {
+      icon = Icons.favorite;
+    }
+    else {
+      icon = Icons.favorite_border;
+    }
+
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center, 
-        children: [
-          Text('A random AWESOME idea:'),
-          BigCard(pair: pair),
-          ElevatedButton( 
-            onPressed: () { 
-              appState.getNext();
-            }, 
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromRGBO(243, 251, 236, 1), 
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center, 
+          children: [
+            Text('A random AWESOME idea:'),
+            BigCard(pair: pair), 
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: () {
+                    appState.toggleFavorite();
+                  }, 
+                  icon: Icon(icon), 
+                  label: Text('Like'), 
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromRGBO(243, 251, 236, 1), 
+                  ),
+                ),
+
+                SizedBox(width:10), 
+
+                ElevatedButton( 
+                  onPressed: () { 
+                    appState.getNext();
+                  }, 
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromRGBO(243, 251, 236, 1), 
+                  ),
+                  child: Text('Next'),
+                ), 
+              ],
             ),
-            child: Text('Next'),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
