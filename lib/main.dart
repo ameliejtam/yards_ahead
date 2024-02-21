@@ -35,7 +35,7 @@ class MyAppState extends ChangeNotifier {
     notifyListeners();
   } 
 
-  // adding functionality tutorial 
+  // like button saving favourite words 
   var favorites = <WordPair>[];
 
   void toggleFavorite() {
@@ -56,7 +56,7 @@ class MyHomePage extends StatelessWidget {
     var appState = context.watch<MyAppState>();
     var pair = appState.current;
 
-    // like button 
+    // like button icon
     IconData icon;
     if (appState.favorites.contains(pair)) {
       icon = Icons.favorite;
@@ -71,11 +71,13 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center, 
           children: [
             Text('A random AWESOME idea:'),
+            // box with word pair 
             BigCard(pair: pair), 
             SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // like button
                 ElevatedButton.icon(
                   onPressed: () {
                     appState.toggleFavorite();
@@ -89,6 +91,7 @@ class MyHomePage extends StatelessWidget {
 
                 SizedBox(width:10), 
 
+                // next button
                 ElevatedButton( 
                   onPressed: () { 
                     appState.getNext();
