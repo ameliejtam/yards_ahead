@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 part 'contact.dart';
 part 'home.dart';
+part 'map.dart';
+part 'calendar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -75,6 +77,12 @@ class _MyHomePageState extends State<MyHomePage> {
       case 1:
         page = ContactPage();
         break;
+      case 2:
+        page = MapPage();
+        break;
+      case 3:
+        page = CalendarPage();
+        break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -94,8 +102,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       label: Text('Home'),
                     ),
                     NavigationRailDestination(
-                      icon: Icon(Icons.favorite),
+                      icon: Icon(Icons.book),
                       label: Text('Contacts'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.map),
+                      label: Text('Map'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.calendar_month),
+                      label: Text('Calendar'),
                     ),
                   ],
                   selectedIndex: selectedIndex,

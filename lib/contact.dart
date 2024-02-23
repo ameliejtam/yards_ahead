@@ -26,3 +26,4 @@ class ContactPage extends StatelessWidget {
     );
   }
 }
+
