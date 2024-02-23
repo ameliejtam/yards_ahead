@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
-        title: 'Namer App',
+        title: 'Yards Ahead',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(164, 195, 133, 1)),
@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
         page = GeneratorPage();
         break;
       case 1:
-        page = FavoritesPage();
+        page = ContactPage();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
@@ -92,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     NavigationRailDestination(
                       icon: Icon(Icons.favorite),
-                      label: Text('Favourites'),
+                      label: Text('Contacts'),
                     ),
                   ],
                   selectedIndex: selectedIndex,
@@ -191,7 +191,7 @@ class BigCard extends StatelessWidget {
 
 
 
-class FavoritesPage extends StatelessWidget {
+class ContactPage extends StatelessWidget {
   @override 
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
