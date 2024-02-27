@@ -62,7 +62,7 @@ class BigCard extends StatelessWidget {
     );
 
     return Card(
-      color: Color.fromRGBO(243, 251, 236, 1),
+      color: Color.fromRGBO(164, 195, 133, 1),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Text(pair.asPascalCase, style: style),

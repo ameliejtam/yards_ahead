@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
         title: 'Yards Ahead',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(164, 195, 133, 1)),
-          scaffoldBackgroundColor: const Color.fromRGBO(164, 195, 133, 1),
+          colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(243, 251, 236, 1)),
+          scaffoldBackgroundColor: const Color.fromRGBO(243, 251, 236, 1), 
         ),
         home: MyHomePage(),
       ),
@@ -55,87 +55,10 @@ class MyAppState extends ChangeNotifier {
 }
 
 
-// ...
-
 class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
-
-// class _MyHomePageState extends State<MyHomePage> {
-//   var selectedIndex = 0;    
-
-//   @override
-//   Widget build(BuildContext context) {
-//     // ...
-
-//     Widget page;
-//     switch (selectedIndex) {
-//       case 0:
-//         page = GeneratorPage();
-//         break;
-//       case 1:
-//         page = ContactPage();
-//         break;
-//       case 2:
-//         page = MapPage();
-//         break;
-//       case 3:
-//         page = CalendarPage();
-//         break;
-//       default:
-//         throw UnimplementedError('no widget for $selectedIndex');
-//     }
-
-//     // ...
-//     return LayoutBuilder(
-//       builder: (context, contraints) {
-//         return Scaffold(
-//           body: Row(
-//             children: [
-//               SafeArea(
-//                 child: NavigationRail(
-//                   extended: contraints.maxWidth >= 600,
-//                   destinations: [
-//                     NavigationRailDestination(
-//                       icon: Icon(Icons.home),
-//                       label: Text('Home'),
-//                     ),
-//                     NavigationRailDestination(
-//                       icon: Icon(Icons.book),
-//                       label: Text('Contacts'),
-//                     ),
-//                     NavigationRailDestination(
-//                       icon: Icon(Icons.map),
-//                       label: Text('Map'),
-//                     ),
-//                     NavigationRailDestination(
-//                       icon: Icon(Icons.calendar_month),
-//                       label: Text('Calendar'),
-//                     ),
-//                   ],
-//                   selectedIndex: selectedIndex,
-//                   onDestinationSelected: (value) {
-//                     setState(() {
-//                       selectedIndex = value;
-//                     });
-//                   },
-//                 ),
-//               ),
-//               Expanded(
-//                 child: Container(
-//                   color: Theme.of(context).colorScheme.primaryContainer,
-//                   child: page,
-//                 ),
-//               ),
-//             ],
-//           ),
-//         );
-//       }
-//     );
-//   }
-// } 
-
 
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -154,8 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Center(
       child: CalendarPage(),
     ),
-
-  ];
+  ]; 
 
   _changeTab(int index) {
     setState(() {
@@ -168,11 +90,15 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(),
       body: _pages[_selectedTab],
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Color.fromRGBO(164, 195, 133, 1),
+        ),
+      child: BottomNavigationBar(
         currentIndex: _selectedTab,
         onTap: (index) => _changeTab(index),
-        selectedItemColor: Colors.red,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: Color.fromRGBO(108, 129, 88, 1),
+        unselectedItemColor: Color.fromRGBO(243, 251, 236, 1),
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Contacts"),
@@ -182,6 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(Icons.calendar_month), label: "Calendar"),
         
         ],
+      ),
       ),
     );
   }
