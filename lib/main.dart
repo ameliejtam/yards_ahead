@@ -1,16 +1,21 @@
+//Import packages for functionality purposes later on in the code
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
+//Different parts, or "pages" of the web app - links to other dart files in this project
 part 'contact.dart';
 part 'home.dart';
 part 'map.dart';
 part 'calendar.dart';
 
+//Run and debug the app
 void main() {
   runApp(const MyApp());
 }
 
+//StatelessWidget is used to give us more freedom with UI design
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
