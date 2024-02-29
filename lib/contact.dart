@@ -24,19 +24,29 @@ class ContactPage extends StatelessWidget {
   //       )
   //     ],
   //   );
+
   return Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Name(),
-        SizedBox(height: 10),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Address(), 
-            SizedBox(width: 10),
+            AddressTitle(), 
+            SizedBox(width:60),
+            NextTrimTitle(), 
+            SizedBox(width: 60),
+            NotesTitle(), 
+          ],
+        ),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Address(),
+            SizedBox(width:60),
             NextTrim(), 
-            SizedBox(width: 10),
+            SizedBox(width: 60),
             Notes(), 
           ],
         ),
@@ -76,37 +86,21 @@ class ContactPage extends StatelessWidget {
   }
 }
 
-class Name extends StatelessWidget {
-  const Name({
+class Notes extends StatelessWidget {
+  const Notes({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final style = theme.textTheme.displayMedium!.copyWith(
-      color: Color.fromRGBO(108, 129, 88, 1), 
-    );
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text('name'),
+    return Container(
+      width: 400, 
+      // color: Colors.blue,
+      child: Flexible(child: Text('This is just a random chunck of text to show how you can add notes to this webapp so additional information can be added for the client and user!!'),
+      ),
     );
   }
 }
-
-
-class Address extends StatelessWidget {
-  const Address({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text("Address");
-  }
-}
-
 
 class NextTrim extends StatelessWidget {
   const NextTrim({
@@ -115,19 +109,102 @@ class NextTrim extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("Next Trimming");
+    return Text('January 20, 2024');
   }
 }
 
-
-class Notes extends StatelessWidget {
-  const Notes({
+class Address extends StatelessWidget {
+  const Address({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Text("Notes");
+    return Text('123 Street');
+  }
+}
+
+
+class Name extends StatelessWidget {
+  const Name({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final style = theme.textTheme.headlineSmall!.copyWith(
+      color: Color.fromRGBO(108, 129, 88, 1),
+      fontWeight: FontWeight.bold, 
+    );
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text('Larry Jane', style: style),
+    );
+  }
+}
+
+
+class AddressTitle extends StatelessWidget {
+  const AddressTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final style = theme.textTheme.titleMedium!.copyWith(
+      color: Color.fromRGBO(108, 129, 88, 1),
+      fontWeight: FontWeight.bold, 
+    );
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text('Address', style: style),
+    );
+  }
+}
+
+
+class NextTrimTitle extends StatelessWidget {
+  const NextTrimTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+     final theme = Theme.of(context);
+    final style = theme.textTheme.titleMedium!.copyWith(
+      color: Color.fromRGBO(108, 129, 88, 1),
+      fontWeight: FontWeight.bold, 
+    );
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text('Next Trimming', style: style),
+    );
+  }
+}
+
+
+class NotesTitle extends StatelessWidget {
+  const NotesTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+     final theme = Theme.of(context);
+    final style = theme.textTheme.titleMedium!.copyWith(
+      color: Color.fromRGBO(108, 129, 88, 1),
+      fontWeight: FontWeight.bold, 
+    );
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text('Notes', style: style),
+    );
   }
 }
 
@@ -156,3 +233,13 @@ class Notes extends StatelessWidget {
 //     );
   // }
 // }
+
+
+class inputPage extends StatelessWidget {
+  const inputPage({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    return Text('Input page!');
+  }
+}
