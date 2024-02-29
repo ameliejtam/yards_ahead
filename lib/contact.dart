@@ -3,7 +3,7 @@ part of 'main.dart';
 class ContactPage extends StatelessWidget {
   @override 
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
+    // var appState = context.watch<MyAppState>();
 
     // if (appState.favorites.isEmpty) {
     // return Center(
@@ -87,7 +87,7 @@ class Name extends StatelessWidget {
     final style = theme.textTheme.displayMedium!.copyWith(
       color: Color.fromRGBO(108, 129, 88, 1), 
     );
-    
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text('name'),
