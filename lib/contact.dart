@@ -50,6 +50,19 @@ class ContactPage extends StatelessWidget {
             Notes(), 
           ],
         ),
+        Expanded(
+          child: Align(
+            alignment: Alignment(0.9, 0.9),
+            child: FloatingActionButton(
+              onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder :(context) => const InputPage()),
+              );
+              },
+              ),
+            ),
+        ),
       ],
     )
   );
@@ -93,7 +106,7 @@ class Notes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 400, 
       // color: Colors.blue,
       child: Flexible(child: Text('This is just a random chunck of text to show how you can add notes to this webapp so additional information can be added for the client and user!!'),
@@ -209,6 +222,30 @@ class NotesTitle extends StatelessWidget {
 }
 
 
+
+class InputPage extends StatelessWidget {
+  const InputPage({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+
+        children: [
+          ElevatedButton(onPressed: (){
+            Navigator.pop(context);
+          },
+          child: Text('Submit')
+          ),
+        ],
+      )
+    );
+  } 
+}
+
+
+
+
 // class contactInfo extends StatelessWidget {
 //   const contactInfo({
 //     super.key,
@@ -235,11 +272,3 @@ class NotesTitle extends StatelessWidget {
 // }
 
 
-class inputPage extends StatelessWidget {
-  const inputPage({super.key});
-  
-  @override
-  Widget build(BuildContext context) {
-    return Text('Input page!');
-  }
-}
