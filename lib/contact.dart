@@ -25,32 +25,91 @@ class ContactPage extends StatelessWidget {
   //     ],
   //   );
 
-  return Center(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Name(),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            AddressTitle(), 
-            SizedBox(width:60),
-            NextTrimTitle(), 
-            SizedBox(width: 60),
-            NotesTitle(), 
+  // return Center(
+  //   child: Column(
+  //     mainAxisAlignment: MainAxisAlignment.start,
+  //     children: [
+  //       Name(),
+  //       Row(
+  //         mainAxisSize: MainAxisSize.min,
+  //         children: [
+  //           AddressTitle(), 
+  //           SizedBox(width:60),
+  //           NextTrimTitle(), 
+  //           SizedBox(width: 60),
+  //           NotesTitle(), 
+  //         ],
+  //       ),
+  //       Row(
+  //         mainAxisSize: MainAxisSize.min,
+  //         children: [
+  //           Address(),
+  //           SizedBox(width:60),
+  //           NextTrim(), 
+  //           SizedBox(width: 60),
+  //           Notes(), 
+  //         ],
+  //       ),
+  //       Expanded(
+  //         child: Align(
+  //           alignment: Alignment(0.9, 0.9),
+  //           child: FloatingActionButton(
+  //             onPressed: () {
+  //             Navigator.push(
+  //               context,
+  //               MaterialPageRoute(builder :(context) => const InputPage()),
+  //             );
+  //             },
+  //             child: Text('+', style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2.5),),
+  //             ),
+  //           ),
+  //       ),
+  //     ],
+  //   )
+  // );
+
+  return Column(
+    children: [
+      Container(
+        decoration: BoxDecoration(
+          border: Border.all(width: 3, color: Color.fromRGBO(211, 222, 188, 1)),
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+        ),
+        // alignment: Alignment.topCenter,
+        child: Table(
+          border: TableBorder.all(color: Color.fromRGBO(243, 251, 236, 1)),
+          columnWidths: const <int, TableColumnWidth>{
+              0: FixedColumnWidth(250),
+              1: FixedColumnWidth(250),
+              2: FixedColumnWidth(350),
+          },
+          defaultVerticalAlignment: TableCellVerticalAlignment.top,
+          children: <TableRow>[
+            TableRow(
+              children: [
+                Name(),
+                SizedBox(height: 10, width: 10,),
+                SizedBox(height: 10, width: 10,),
+                ]
+            ),
+            TableRow(
+              children:[
+                AddressTitle(), 
+                NextTrimTitle(), 
+                NotesTitle(), 
+              ],
+            ),
+            TableRow(
+              children: [
+                Address(),
+                NextTrim(), 
+                Notes(), 
+              ],
+            ),
           ],
         ),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Address(),
-            SizedBox(width:60),
-            NextTrim(), 
-            SizedBox(width: 60),
-            Notes(), 
-          ],
-        ),
-        Expanded(
+      ),
+      Expanded(
           child: Align(
             alignment: Alignment(0.9, 0.9),
             child: FloatingActionButton(
@@ -60,13 +119,12 @@ class ContactPage extends StatelessWidget {
                 MaterialPageRoute(builder :(context) => const InputPage()),
               );
               },
+              child: Text('+', style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2.5),),
               ),
             ),
         ),
-      ],
-    )
+    ],
   );
-  
   // return Center(
   //     child: Column(
   //       mainAxisAlignment: MainAxisAlignment.center,
