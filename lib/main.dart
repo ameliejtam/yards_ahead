@@ -4,6 +4,7 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:async'; 
 
 
 //Different parts, or "pages" of the web app - links to other dart files in this project
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(243, 251, 236, 1)),
           scaffoldBackgroundColor: const Color.fromRGBO(243, 251, 236, 1), 
         ),
-        home: MyHomePage(),
+        home: SplashScreen(),
       ),
     );
   }
@@ -62,13 +63,41 @@ class MyAppState extends ChangeNotifier {
 }
 
 
-class MyHomePage extends StatefulWidget {
+class SplashScreen extends StatefulWidget { 
+@override 
+_SplashScreenState createState() => _SplashScreenState(); 
+} //homepage create a state
+
+class _SplashScreenState extends State<SplashScreen> { 
+@override 
+void initState() { 
+	super.initState(); 
+	Timer(Duration(seconds: 3), //timer, splashscreen lasts 3 seconds
+		()=>Navigator.pushReplacement(context, 
+										MaterialPageRoute(builder: 
+														(context) => 
+														HomePage() //push the second (main) screen
+														) 
+									) 
+		); 
+} 
+
+@override 
+Widget build(BuildContext context) { 
+	return Container( 
+	color: Color.fromARGB(255, 180, 196, 142), 
+	child:Icon(Icons.home) 
+	); 
+} 
+} 
+
+class HomePage extends StatefulWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
   int _selectedTab = 0;
 
   List _pages = [
