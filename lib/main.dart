@@ -16,7 +16,7 @@ part 'calendar.dart';
 //Run and debug the app
 void main() {
   //Get rid of debug mode banner
-  //debugShowCheckedModeBanner: false,
+  // debugShowCheckedModeBanner: false;
   runApp(const MyApp());
 }
 
@@ -74,7 +74,7 @@ class _SplashScreenState extends State<SplashScreen> {
 @override 
 void initState() { 
 	super.initState(); 
-	Timer(Duration(seconds: 3), //timer, splashscreen lasts 3 seconds
+	Timer(Duration(seconds: 1), //timer, splashscreen lasts 3 seconds
 		()=>Navigator.pushReplacement(context, 
 										MaterialPageRoute(builder: 
 														(context) => 

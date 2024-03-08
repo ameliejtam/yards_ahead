@@ -286,19 +286,55 @@ class InputPage extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-
-        children: [
-          ElevatedButton(onPressed: (){
-            Navigator.pop(context);
-          },
-          child: Text('Submit')
-          ),
-        ],
+    const formTitle = 'Contact Information';
+    return MaterialApp(
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(243, 251, 236, 1)),
+        scaffoldBackgroundColor: const Color.fromRGBO(243, 251, 236, 1),
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(formTitle),
+        ),
+        body: Center(
+          child: Column(
+            children: [
+              ContactInput(),
+              ElevatedButton(onPressed: (){
+                Navigator.pop(context);
+              },
+              child: Text('Submit')
+              ),
+            ],
+          )
+        ),
       )
     );
   } 
+}
+
+class ContactInput extends StatelessWidget {
+  const ContactInput({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Enter a search term',
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
 
 
