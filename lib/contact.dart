@@ -125,6 +125,7 @@ class ContactPage extends StatelessWidget {
         ),
     ],
   );
+  
   // return Center(
   //     child: Column(
   //       mainAxisAlignment: MainAxisAlignment.center,
@@ -281,9 +282,26 @@ class NotesTitle extends StatelessWidget {
 
 
 
-class InputPage extends StatelessWidget {
+class InputPage extends StatefulWidget {
   const InputPage({super.key});
-  
+  @override
+  State<InputPage> createState() => _InputPageState(); 
+}
+
+
+class _InputPageState extends State<InputPage> {
+
+  final nameController = TextEditingController();
+  final addressController = TextEditingController();
+
+  // @override
+  // void dispose() {
+  //   // Clean up the controller when the widget is disposed.
+  //   nameController.dispose();
+  //   ageController.dispose();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     const formTitle = 'Contact Information';
@@ -298,12 +316,37 @@ class InputPage extends StatelessWidget {
         ),
         body: Center(
           child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ContactInput(),
-              ElevatedButton(onPressed: (){
-                Navigator.pop(context);
-              },
-              child: Text('Submit')
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: TextField(
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter a search term',
+                ),
+                controller: nameController,
+                ),
+              ), 
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Address',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter a search term',
+                  ),
+                  controller: addressController,
+                ),
+              ), 
+              ElevatedButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                  print(nameController.text);
+                  print(addressController.text);
+                },
+                child: Text('Submit')
               ),
             ],
           )
@@ -313,29 +356,6 @@ class InputPage extends StatelessWidget {
   } 
 }
 
-class ContactInput extends StatelessWidget {
-  const ContactInput({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Enter a search term',
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 
 
