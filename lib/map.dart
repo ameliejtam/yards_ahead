@@ -10,8 +10,8 @@ class MapPage extends StatelessWidget {
         children: [
           FlutterMap(
             options: MapOptions(
-              center: latLng.LatLng(51.509364, -0.128928),
-              zoom: 3.2,
+              center: latLng.LatLng(45.4215,-75.6972),
+              zoom: 11,
             ),
             children: [
               TileLayer(
