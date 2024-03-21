@@ -90,21 +90,40 @@ class ContactPage extends StatelessWidget {
                 Name(),
                 SizedBox(height: 10, width: 10,),
                 SizedBox(height: 10, width: 10,),
+                SizedBox(height: 10, width: 10,),
                 ]
             ),
             TableRow(
               children:[
                 AddressTitle(), 
                 NextTrimTitle(), 
-                NotesTitle(), 
+                Text('Phone'),
+                Text('Email'),
               ],
             ),
             TableRow(
               children: [
                 Address(),
                 NextTrim(), 
-                Notes(), 
+                Text('123-456-7890'), 
+                Text('larryjane@email.com'),
               ],
+            ),
+            TableRow(
+              children: [
+                NotesTitle(),
+                SizedBox(height: 10, width: 10,),
+                SizedBox(height: 10, width: 10,),
+                SizedBox(height: 10, width: 10,),
+              ]
+            ),
+            TableRow(
+              children: [
+                Notes(),
+                SizedBox(height: 10, width: 10,),
+                SizedBox(height: 10, width: 10,),
+                SizedBox(height: 10, width: 10,),
+              ]
             ),
           ],
         ),
@@ -168,7 +187,10 @@ class Notes extends StatelessWidget {
     return SizedBox(
       width: 400, 
       // color: Colors.blue,
-      child: Flexible(child: Text('This is just a random chunck of text to show how you can add notes to this webapp so additional information can be added for the client and user!!'),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+        child: Flexible(child: Text('This is just a random chunck of text to show how you can add notes to this webapp so additional information can be added for the client and user!!'),
+        ),
       ),
     );
   }
@@ -181,7 +203,10 @@ class NextTrim extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('January 20, 2024');
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+      child: Text('January 20, 2024'),
+    );
   }
 }
 
@@ -192,7 +217,10 @@ class Address extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('123 Street');
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+      child: Text('123 Street'),
+    );
   }
 }
 
@@ -292,7 +320,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
 
   final nameController = TextEditingController();
-  final addressController = TextEditingController();
+  final addressController = TextEditingController(); 
 
   // @override
   // void dispose() {
@@ -318,8 +346,9 @@ class _InputPageState extends State<InputPage> {
           child: Column(
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              NameInputTitle(),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 child: TextField(
                 decoration: InputDecoration(
                   labelText: 'Name',
@@ -329,8 +358,10 @@ class _InputPageState extends State<InputPage> {
                 controller: nameController,
                 ),
               ), 
+              SizedBox(height: 16, width: 10,),
+              AdressInputTitle(),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 child: TextField(
                   decoration: InputDecoration(
                     labelText: 'Address',
@@ -340,6 +371,7 @@ class _InputPageState extends State<InputPage> {
                   controller: addressController,
                 ),
               ), 
+              SizedBox(height: 20, width: 10,),
               ElevatedButton(
                 onPressed: (){
                   Navigator.pop(context);
@@ -354,6 +386,52 @@ class _InputPageState extends State<InputPage> {
       )
     );
   } 
+}
+
+class AdressInputTitle extends StatelessWidget {
+  const AdressInputTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+     final theme = Theme.of(context);
+    final style = theme.textTheme.titleLarge!.copyWith(
+      color: Color.fromRGBO(108, 129, 88, 1),
+      // fontWeight: FontWeight.bold, 
+    );
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      child: Align( 
+        alignment: Alignment.bottomLeft,
+        child: Text('Address', style: style),
+      )
+    );
+  }
+}
+
+class NameInputTitle extends StatelessWidget {
+  const NameInputTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+     final theme = Theme.of(context);
+    final style = theme.textTheme.titleLarge!.copyWith(
+      color: Color.fromRGBO(108, 129, 88, 1),
+      // fontWeight: FontWeight.bold, 
+    );
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      child: Align( 
+        alignment: Alignment.bottomLeft,
+        child: Text('Name', style: style),
+      )
+    );
+  }
 }
 
 
