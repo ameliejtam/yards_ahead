@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:async'; 
 import 'package:table_calendar/table_calendar.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart' as latLng;
+import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
+
 
 
 //Different parts, or "pages" of the web app - links to other dart files in this project
