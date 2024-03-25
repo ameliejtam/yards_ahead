@@ -79,9 +79,10 @@ class ContactPage extends StatelessWidget {
         child: Table(
           border: TableBorder.all(color: Color.fromRGBO(243, 251, 236, 1)),
           columnWidths: const <int, TableColumnWidth>{
-              0: FixedColumnWidth(250),
-              1: FixedColumnWidth(250),
-              2: FixedColumnWidth(350),
+              0: FixedColumnWidth(180),
+              1: FixedColumnWidth(180),
+              2: FixedColumnWidth(180),
+              3: FixedColumnWidth(180), 
           },
           defaultVerticalAlignment: TableCellVerticalAlignment.top,
           children: <TableRow>[
@@ -91,39 +92,26 @@ class ContactPage extends StatelessWidget {
                 SizedBox(height: 10, width: 10,),
                 SizedBox(height: 10, width: 10,),
                 SizedBox(height: 10, width: 10,),
+                SizedBox(height: 10, width: 10,),
                 ]
             ),
             TableRow(
               children:[
                 AddressTitle(), 
                 NextTrimTitle(), 
-                Text('Phone'),
-                Text('Email'),
+                PhoneTitle(),
+                EmailTitle(),
+                NotesTitle(), 
               ],
             ),
             TableRow(
               children: [
                 Address(),
                 NextTrim(), 
-                Text('123-456-7890'), 
-                Text('larryjane@email.com'),
-              ],
-            ),
-            TableRow(
-              children: [
-                NotesTitle(),
-                SizedBox(height: 10, width: 10,),
-                SizedBox(height: 10, width: 10,),
-                SizedBox(height: 10, width: 10,),
-              ]
-            ),
-            TableRow(
-              children: [
+                Phone(), 
+                Email(),
                 Notes(),
-                SizedBox(height: 10, width: 10,),
-                SizedBox(height: 10, width: 10,),
-                SizedBox(height: 10, width: 10,),
-              ]
+              ],
             ),
           ],
         ),
@@ -177,6 +165,74 @@ class ContactPage extends StatelessWidget {
   }
 }
 
+class Email extends StatelessWidget {
+  const Email({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+      child: Text('larryjane@email.com'),
+    );
+  }
+}
+
+class Phone extends StatelessWidget {
+  const Phone({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+      child: Text('123-456-7890'),
+    );
+  }
+}
+
+class EmailTitle extends StatelessWidget {
+  const EmailTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final style = theme.textTheme.titleMedium!.copyWith(
+      color: Color.fromRGBO(108, 129, 88, 1),
+      fontWeight: FontWeight.bold, 
+    );
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text('Email', style: style),
+    );
+  }
+}
+
+class PhoneTitle extends StatelessWidget {
+  const PhoneTitle({
+    super.key,
+  });
+
+    @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final style = theme.textTheme.titleMedium!.copyWith(
+      color: Color.fromRGBO(108, 129, 88, 1),
+      fontWeight: FontWeight.bold, 
+    );
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text('Phone', style: style),
+    );
+  }
+}
+
 class Notes extends StatelessWidget {
   const Notes({
     super.key,
@@ -219,7 +275,7 @@ class Address extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-      child: Text('123 Street'),
+      child: Text('123 Magical Tree Street'),
     );
   }
 }
@@ -321,6 +377,8 @@ class _InputPageState extends State<InputPage> {
 
   final nameController = TextEditingController();
   final addressController = TextEditingController(); 
+  final phoneController = TextEditingController(); 
+  final emailController = TextEditingController(); 
 
   // @override
   // void dispose() {
@@ -351,9 +409,8 @@ class _InputPageState extends State<InputPage> {
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 child: TextField(
                 decoration: InputDecoration(
-                  labelText: 'Name',
                   border: OutlineInputBorder(),
-                  hintText: 'Enter a search term',
+                  hintText: 'Enter the name',
                 ),
                 controller: nameController,
                 ),
@@ -364,11 +421,34 @@ class _InputPageState extends State<InputPage> {
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 child: TextField(
                   decoration: InputDecoration(
-                    labelText: 'Address',
                     border: OutlineInputBorder(),
-                    hintText: 'Enter a search term',
+                    hintText: 'Enter the address',
                   ),
                   controller: addressController,
+                ),
+              ), 
+              SizedBox(height: 20, width: 10,),
+              PhoneInputTitle(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter the phone number',
+                  ),
+                  controller: phoneController,
+                ),
+              ), 
+              SizedBox(height: 20, width: 10,),
+              EmailInputTitle(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter the email',
+                  ),
+                  controller: emailController,
                 ),
               ), 
               SizedBox(height: 20, width: 10,),
@@ -377,6 +457,8 @@ class _InputPageState extends State<InputPage> {
                   Navigator.pop(context);
                   print(nameController.text);
                   print(addressController.text);
+                  print(phoneController.text);
+                  print(emailController.text);
                 },
                 child: Text('Submit')
               ),
@@ -387,6 +469,53 @@ class _InputPageState extends State<InputPage> {
     );
   } 
 }
+
+class EmailInputTitle extends StatelessWidget {
+  const EmailInputTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+     final theme = Theme.of(context);
+    final style = theme.textTheme.titleLarge!.copyWith(
+      color: Color.fromRGBO(108, 129, 88, 1),
+      // fontWeight: FontWeight.bold, 
+    );
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      child: Align( 
+        alignment: Alignment.bottomLeft,
+        child: Text('Email', style: style),
+      )
+    );
+  }
+}
+
+class PhoneInputTitle extends StatelessWidget {
+  const PhoneInputTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+     final theme = Theme.of(context);
+    final style = theme.textTheme.titleLarge!.copyWith(
+      color: Color.fromRGBO(108, 129, 88, 1),
+      // fontWeight: FontWeight.bold, 
+    );
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      child: Align( 
+        alignment: Alignment.bottomLeft,
+        child: Text('Phone', style: style),
+      )
+    );
+  }
+}
+
 
 class AdressInputTitle extends StatelessWidget {
   const AdressInputTitle({
@@ -433,6 +562,7 @@ class NameInputTitle extends StatelessWidget {
     );
   }
 }
+
 
 
 
