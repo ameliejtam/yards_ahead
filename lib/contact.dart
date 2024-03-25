@@ -1,5 +1,152 @@
 part of 'main.dart'; 
 
+// Database 
+void contactMain() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final database = openDatabase(
+    join(await getDatabasesPath(), 'clientele_database.db'),
+    onCreate: (db, version) {
+      return db.execute(
+        'CREATE TABLE clients(name TEXT, address TEXT, trim TEXT, phone TEXT, email TEXT, notes TEXT)',
+      );
+    },
+    version: 1,
+  );
+
+  Future<void> insertClient(Client client) async {
+
+    final db = await database;
+
+    await db.insert(
+      'clients',
+      client.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  // A method that retrieves all the dogs from the dogs table.
+  Future<List<Client>> clients() async {
+    // Get a reference to the database.
+    final db = await database;
+
+    // Query the table for all the dogs.
+    final List<Map<String, Object?>> clientMaps = await db.query('clients');
+
+    // Convert the list of each dog's fields into a list of `Dog` objects.
+    return [
+      for (final {
+            'name': name as String,
+            'address': address as String,
+            'trim': trim as String,
+            'phone': phone as String,
+            'email': email as String,
+            'notes': notes as String,
+          } in clientMaps)
+        Client(name: name, address: address, trim: trim, phone: phone, email: email, notes: notes),
+    ];
+  }
+
+  Future<void> updateClient(Client client) async {
+    // Get a reference to the database.
+    final db = await database;
+
+    // Update the given Dog.
+    await db.update(
+      'clients',
+      client.toMap(),
+      // Ensure that the Dog has a matching id.
+      where: 'name = ?',
+      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      whereArgs: [client.name],
+    );
+  }
+
+  Future<void> deleteClient(name) async {
+    // Get a reference to the database.
+    final db = await database;
+
+    // Remove the Dog from the database.
+    await db.delete(
+      'clients',
+      // Use a `where` clause to delete a specific dog.
+      where: 'name = ?',
+      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      whereArgs: [name],
+    );
+  }
+
+  // Create a Dog and add it to the dogs table
+  var newClient = Client(
+    name: 'Larry Jane',
+    address: '123 Magical Tree Street',
+    trim: 'January 20, 2024',
+    phone: '123-456-7890',
+    email: 'larryjane@email.com',
+    notes: 'This is just a random chunck of text to show how you can add notes to this webapp so additional information can be added for the client and user!!',
+  );
+
+  await insertClient(newClient);
+
+  // Now, use the method above to retrieve all the dogs.
+  print(await clients()); // Prints a list that include Fido.
+
+  // Update Fido's age and save it to the database.
+  newClient = Client(
+    name: 'Larry Jane',
+    address: '123 Magical Tree Street',
+    trim: 'April 12, 2024', 
+    phone: '123-456-7890',
+    email: 'larryjane@email.com',
+    notes: 'Words no longer needed!',
+  );
+
+  await updateClient(newClient);
+
+  // Print the updated results.
+  print(await clients()); // Prints Fido with age 42.
+
+  // Delete Fido from the database.
+  await deleteClient(newClient.name);
+
+  // Print the list of dogs (empty).
+  print(await clients());
+}
+
+
+
+class Client {
+  final String name;
+  final String address;
+  final String trim;
+  final String phone;
+  final String email;
+  final String notes;
+
+
+  Client({
+    required this.name,
+    required this.address,
+    required this.trim,
+    required this.phone,
+    required this.email,
+    required this.notes,
+  });
+
+  // Convert a Dog into a Map. The keys must correspond to the names of the
+  // columns in the database.
+  Map<String, Object?> toMap() {
+    return {
+      'name': name,
+      'address': address,
+      'trim': trim,
+      'phone': phone, 
+      'email': email, 
+      'notes': notes, 
+    };
+  }
+}
+
+
 class ContactPage extends StatelessWidget {
   @override 
   Widget build(BuildContext context) {
