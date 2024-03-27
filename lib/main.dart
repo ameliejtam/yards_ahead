@@ -8,6 +8,8 @@ import 'dart:async';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
 
+import 'event.dart';
+
 
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
