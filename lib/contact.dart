@@ -76,7 +76,7 @@ void contactMain() async {
   }
 
   // Create a Dog and add it to the dogs table
-  var newClient = Client(
+  var newerClient = Client(
     name: 'Larry Jane',
     address: '123 Magical Tree Street',
     trim: 'January 20, 2024',
@@ -85,13 +85,13 @@ void contactMain() async {
     notes: 'This is just a random chunck of text to show how you can add notes to this webapp so additional information can be added for the client and user!!',
   );
 
-  await insertClient(newClient);
+  await insertClient(newerClient);
 
   // Now, use the method above to retrieve all the dogs.
   print(await clients()); // Prints a list that include Fido.
 
   // Update Fido's age and save it to the database.
-  newClient = Client(
+  newerClient = Client(
     name: 'Larry Jane',
     address: '123 Magical Tree Street',
     trim: 'April 12, 2024', 
@@ -100,13 +100,13 @@ void contactMain() async {
     notes: 'Words no longer needed!',
   );
 
-  await updateClient(newClient);
+  await updateClient(newerClient);
 
   // Print the updated results.
   print(await clients()); // Prints Fido with age 42.
 
   // Delete Fido from the database.
-  await deleteClient(newClient.name);
+  await deleteClient(newerClient.name);
 
   // Print the list of dogs (empty).
   print(await clients());
@@ -122,7 +122,6 @@ class Client {
   final String email;
   final String notes;
 
-
   Client({
     required this.name,
     required this.address,
@@ -132,8 +131,6 @@ class Client {
     required this.notes,
   });
 
-  // Convert a Dog into a Map. The keys must correspond to the names of the
-  // columns in the database.
   Map<String, Object?> toMap() {
     return {
       'name': name,
@@ -526,6 +523,7 @@ class _InputPageState extends State<InputPage> {
   final addressController = TextEditingController(); 
   final phoneController = TextEditingController(); 
   final emailController = TextEditingController(); 
+  final notesController = TextEditingController(); 
 
   // @override
   // void dispose() {
@@ -534,6 +532,7 @@ class _InputPageState extends State<InputPage> {
   //   ageController.dispose();
   //   super.dispose();
   // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -599,13 +598,30 @@ class _InputPageState extends State<InputPage> {
                 ),
               ), 
               SizedBox(height: 20, width: 10,),
+              NotesInputTitle(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter some notes',
+                  ),
+                  controller: notesController,
+                ),
+              ), 
+              SizedBox(height: 20, width: 10,),
               ElevatedButton(
                 onPressed: (){
                   Navigator.pop(context);
-                  print(nameController.text);
-                  print(addressController.text);
-                  print(phoneController.text);
-                  print(emailController.text);
+                  var newClient = Client(
+                    name: nameController.text,
+                    address: addressController.text,
+                    trim: 'null', 
+                    phone: phoneController.text,
+                    email: emailController.text,
+                    notes: notesController.text,
+                  );
+                  addClientDatabase(nameController.text);
                 },
                 child: Text('Submit')
               ),
@@ -615,6 +631,33 @@ class _InputPageState extends State<InputPage> {
       )
     );
   } 
+}
+
+addClientDatabase(nameControllerText) {
+  print(nameControllerText);
+}
+
+class NotesInputTitle extends StatelessWidget {
+  const NotesInputTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+     final theme = Theme.of(context);
+    final style = theme.textTheme.titleLarge!.copyWith(
+      color: Color.fromRGBO(108, 129, 88, 1),
+      // fontWeight: FontWeight.bold, 
+    );
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      child: Align( 
+        alignment: Alignment.bottomLeft,
+        child: Text('Notes', style: style),
+      )
+    );
+  }
 }
 
 class EmailInputTitle extends StatelessWidget {

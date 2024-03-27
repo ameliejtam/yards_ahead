@@ -84,7 +84,7 @@ class _SplashScreenState extends State<SplashScreen> {
 void initState() { 
 	super.initState(); 
 	Timer(Duration(seconds: 1), //timer, splashscreen lasts 3 seconds
-		()=>Navigator.pushReplacement(context, 
+		()=>Navigator.pushReplacement(this.context, 
 										MaterialPageRoute(builder: 
 														(context) => 
 														HomePage() //push the second (main) screen
