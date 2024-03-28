@@ -20,7 +20,7 @@ class _CalendarPageState extends State<CalendarPage> {
   //By using the "ValueNotifier" function, the list will refresh every time a new event is added
   late final ValueNotifier<List<Event>> _selectedEvents;
 
-  //Initialize variables
+  //Initialize variables 
   @override
   void initState() {
     super.initState();
@@ -35,20 +35,22 @@ class _CalendarPageState extends State<CalendarPage> {
     super.dispose();
   }
 
-  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
-    if (!isSameDay(_selectedDay, selectedDay)) {
-      setState(() {
-        _selectedDay = selectedDay;
-        _focusedDay = focusedDay;
-      });
-    }
-  }
-
   //Create function _getEventsForDay to retrieve events for a given day
   //Function should return a list of events for a given day
   List<Event> _getEventsForDay(DateTime day){
     //Return the events that take place on the given day
     return events[day] ?? [];
+  }
+  
+  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+    if (!isSameDay(_selectedDay, selectedDay)) {
+      setState(() {
+        _selectedDay = selectedDay;
+        _focusedDay = focusedDay;
+        //Make sure that events listed are only the events that occur on the day that the user clicked on
+        _selectedEvents.value = _getEventsForDay(selectedDay);
+      });
+    }
   }
 
   @override
@@ -82,12 +84,15 @@ class _CalendarPageState extends State<CalendarPage> {
                 actions: [
                   ElevatedButton(
                     onPressed: () {
+                    //DEBUGGING
+                    List message = ['meeting', 'peepee'];
+                    print(message);
                     //Use the calendar's addEvents function to add submitted events to the selected day
                     events.addAll({
                       _selectedDay!: [Event(_eventController.text)]
                     });
-                    //Store the event name to the calendar
-                    // Navigator.of(context).pop();
+                    //Exit the adding events pop-up
+                    Navigator.of(context).pop();
                     //Display the event on the screen
                     _selectedEvents.value = _getEventsForDay(_selectedDay!);
                   }, 
