@@ -13,12 +13,12 @@ class _CalendarPageState extends State<CalendarPage> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   //Store the events that were created
-  Map<DateTime, List<Event>> events = {};
+  Map<DateTime, List<String>> events = {};
   //Create text input
   TextEditingController _eventController = TextEditingController();
   //Add a list to display the events on a given day
   //By using the "ValueNotifier" function, the list will refresh every time a new event is added
-  late final ValueNotifier<List<Event>> _selectedEvents;
+  late final ValueNotifier<List<String>> _selectedEvents;
 
   //Initialize variables 
   @override
@@ -37,7 +37,7 @@ class _CalendarPageState extends State<CalendarPage> {
 
   //Create function _getEventsForDay to retrieve events for a given day
   //Function should return a list of events for a given day
-  List<Event> _getEventsForDay(DateTime day){
+  List<String> _getEventsForDay(DateTime day){
     //Return the events that take place on the given day
     return events[day] ?? [];
   }
@@ -89,7 +89,7 @@ class _CalendarPageState extends State<CalendarPage> {
                     print(message);
                     //Use the calendar's addEvents function to add submitted events to the selected day
                     events.addAll({
-                      _selectedDay!: [Event(_eventController.text)]
+                      _selectedDay!: [_eventController.text]
                     });
                     //Exit the adding events pop-up
                     Navigator.of(context).pop();
@@ -141,7 +141,7 @@ class _CalendarPageState extends State<CalendarPage> {
           SizedBox(height: 8.0),
           Expanded(
             //Create list to display table calendar elements below the table
-            child: ValueListenableBuilder<List<Event>>(
+            child: ValueListenableBuilder<List<String>>(
               valueListenable: _selectedEvents, 
               builder: (context, value, _) {
                 return ListView.builder(
@@ -155,7 +155,8 @@ class _CalendarPageState extends State<CalendarPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       //Display title of event
-                      child: ListTile(
+                      child: 
+                      ListTile(
                         onTap: () => print(""), 
                         title: Text('${value[index]}'),
                       ),
