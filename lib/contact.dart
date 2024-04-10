@@ -641,22 +641,48 @@ class _InputPageState extends State<InputPage> {
   } 
 } 
 
+
+
+
 class DatabaseHelper{
   static const String _dbName = 'clientele_database.db';
 
   static Future<Database> _getDB() async {
     print('ARGGGGGG');
-    return openDatabase(join(await getDatabasesPath(), _dbName),
-      onCreate: (db, version) async => await db.execute(
-        'CREATE TABLE clients(name TEXT, address TEXT, trim TEXT, phone TEXT, email TEXT, notes TEXT)'),
+    
+  //   return openDatabase(join(await getDatabasesPath(), _dbName),
+  //     onCreate: (db, version) async => await db.execute(
+  //       'CREATE TABLE clients(name TEXT, address TEXT, trim TEXT, phone TEXT, email TEXT, notes TEXT)'),
+  //   version: 1,
+  //   ); 
+  // } 
+  print(getDatabasesPath());
+
+  final String path = join(await getDatabasesPath(), _dbName); 
+
+  print('muah muah');
+  // print(databaseFactory.databaseExists(path));
+  print(getDatabasesPath());
+  print('MUAH');
+
+  return openDatabase(
+    path,
+    onCreate: (db, version) async {
+      await db.execute(
+        'CREATE TABLE clients(name TEXT, address TEXT, trim TEXT, phone TEXT, email TEXT, notes TEXT)',
+      );
+    },
     version: 1,
-    ); 
-  }
+  ); 
+}
 
   static Future<void> insertClient(Client client) async {
     print('BURNNNN'); 
 
-    print(_getDB());
+
+    print(await _getDB());
+
+    print('HEYY');
 
     final db = await _getDB();
 
