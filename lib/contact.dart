@@ -656,25 +656,24 @@ class DatabaseHelper{
   //   version: 1,
   //   ); 
   // } 
-  print(getDatabasesPath());
 
-  final String path = join(await getDatabasesPath(), _dbName); 
+    final String path = join(await getDatabasesPath(), _dbName); 
+     
+    print('muah muah');
+    // print(databaseFactory.databaseExists(path));
+    print(getDatabasesPath());
+    print('MUAH');
 
-  print('muah muah');
-  // print(databaseFactory.databaseExists(path));
-  print(getDatabasesPath());
-  print('MUAH');
-
-  return openDatabase(
-    path,
-    onCreate: (db, version) async {
-      await db.execute(
-        'CREATE TABLE clients(name TEXT, address TEXT, trim TEXT, phone TEXT, email TEXT, notes TEXT)',
-      );
-    },
-    version: 1,
-  ); 
-}
+    return openDatabase(
+      path,
+      onCreate: (db, version) async {
+        await db.execute(
+          'CREATE TABLE clients(name TEXT, address TEXT, trim TEXT, phone TEXT, email TEXT, notes TEXT)',
+        );
+      },
+      version: 1,
+    ); 
+  }
 
   static Future<void> insertClient(Client client) async {
     print('BURNNNN'); 
