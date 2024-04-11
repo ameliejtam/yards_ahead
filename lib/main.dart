@@ -27,7 +27,7 @@ part 'calendar.dart';
 //Run and debug the app
 void main() {
   //Get rid of debug mode banner
-  // debugShowCheckedModeBanner: false;
+  //debugShowCheckedModeBanner: false;
   runApp(const MyApp());
 }
 

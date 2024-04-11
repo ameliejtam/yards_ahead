@@ -17,31 +17,14 @@ class GeneratorPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          BigCard(pair: pair),
-          SizedBox(height: 10),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {
-                  appState.toggleFavorite();
-                },
-                icon: Icon(icon),
-                label: Text('Like'),
-              ),
-              SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () {
-                  appState.getNext();
-                },
-                child: Text('Next'),
-              ),
+            Image.asset("assets/images/Shrub-848x424.jpg"), 
+            Image.asset("assets/images/shrubs-GettyImages-1148591849.jpg"),
+            Image.asset("assets/images/evergreen-shrubs-boxwood.jpg"),
+            Image.asset("assets/images/category-shrubs.webp")
             ],
           ),
-        ],
-      ),
     );
-  }
+}
 }
 
 
@@ -65,8 +48,10 @@ class BigCard extends StatelessWidget {
       color: Color.fromRGBO(164, 195, 133, 1),
       child: Padding(
         padding: const EdgeInsets.all(20),
-        child: Text(pair.asPascalCase, style: style),
+        child: Text("Yards Ahead"),
       ),
     );
   }
 }
+
+
