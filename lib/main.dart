@@ -99,7 +99,7 @@ void initState() {
 Widget build(BuildContext context) { 
 	return Container( 
 	color: Color.fromARGB(255, 180, 196, 142), 
-	child:Icon(Icons.home) 
+	child:Image.asset("assets/images/unnamed.png")
 	); 
 } 
 } 
