@@ -18,9 +18,7 @@ class GeneratorPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
             Image.asset("assets/images/Shrub-848x424.jpg"), 
-            Image.asset("assets/images/shrubs-GettyImages-1148591849.jpg"),
             Image.asset("assets/images/evergreen-shrubs-boxwood.jpg"),
-            Image.asset("assets/images/category-shrubs.webp")
             ],
           ),
     );
