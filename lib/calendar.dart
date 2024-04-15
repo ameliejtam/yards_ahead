@@ -14,7 +14,7 @@ class _CalendarPageState extends State<CalendarPage> {
   DateTime? _selectedDay;
   //Store the events that were created
   Map<DateTime, List<String>> events = {};
-  //Create text input
+  //Create text input to input event name
   TextEditingController _eventController = TextEditingController();
   //Add a list to display the events on a given day
   //By using the "ValueNotifier" function, the list will refresh every time a new event is added
@@ -84,9 +84,6 @@ class _CalendarPageState extends State<CalendarPage> {
                 actions: [
                   ElevatedButton(
                     onPressed: () {
-                    //DEBUGGING
-                    List message = ['meeting', 'peepee'];
-                    print(message);
                     //Use the calendar's addEvents function to add submitted events to the selected day
                     events.addAll({
                       _selectedDay!: [_eventController.text]
