@@ -129,7 +129,16 @@ class Client {
     required this.phone,
     required this.email,
     required this.notes,
-  });
+  }); 
+
+  // factory Client.fromMe(Map<String, dynamic> me) => Client(
+  //   name: me['name'],
+  //   address: me['address'], 
+  //   trim: me['trim'], 
+  //   phone: me['phone'], 
+  //   email: me['email'], 
+  //   notes: me['notes'], 
+  // );
 
   Map<String, Object?> toMap() {
     return {
@@ -141,6 +150,15 @@ class Client {
       'notes': notes, 
     };
   }
+
+  // Map<String, dynamic> toMe() => {
+  //   'name': name,
+  //   'address': address,
+  //   'trim': trim,
+  //   'phone': phone, 
+  //   'email': email, 
+  //   'notes': notes, 
+  // };
 }
 
 
@@ -622,6 +640,8 @@ class _InputPageState extends State<InputPage> {
                       email: emailController.text,
                       notes: notesController.text,));
 
+                  print('PURPLE');
+
                   // print(DatabaseHelper.clients()); 
                 },
                 child: Text('Save information')
@@ -643,7 +663,6 @@ class _InputPageState extends State<InputPage> {
 
 
 
-
 class DatabaseHelper{
   static const String _dbName = 'clientele_database.db';
 
@@ -659,11 +678,8 @@ class DatabaseHelper{
 
     final String path = join(await getDatabasesPath(), _dbName); 
      
-    print('muah muah');
-    // print(databaseFactory.databaseExists(path));
-    print(getDatabasesPath());
-    print('MUAH');
-
+    print('MARCH');
+  
     return openDatabase(
       path,
       onCreate: (db, version) async {
@@ -678,14 +694,14 @@ class DatabaseHelper{
   static Future<void> insertClient(Client client) async {
     print('BURNNNN'); 
 
+    final db = await _getDB(); 
 
-    print(await _getDB());
+    print('gotted');
 
-    print('HEYY');
-
-    final db = await _getDB();
-
-    print('ORANGE');
+    // return await db.insert(
+    //   "Client", client.toMe(),
+    //   conflictAlgorithm: ConflictAlgorithm.replace
+    //   );
 
     await db.insert(
       'clients',
@@ -693,7 +709,7 @@ class DatabaseHelper{
       conflictAlgorithm: ConflictAlgorithm.replace,
     ); 
 
-    print('YELLOW');
+    print('YELLOW'); 
   }
 
    static Future<List<Client>> clients() async {
