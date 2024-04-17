@@ -44,10 +44,24 @@ class GeneratorPage extends StatelessWidget {
       child: Column(
         
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-            Image.asset("assets/images/unnamed.png"), 
+        children: [Image.asset("assets/images/unnamed.png"),
+        CarouselSlider(
+              items: [
             Image.asset("assets/images/evergreen-shrubs-boxwood.jpg"),
+            Image.asset("assets/images/evergreen-shrubs-boxwood.jpg"), 
+            Image.asset("assets/images/evergreen-shrubs-boxwood.jpg")
             ],
+              options: CarouselOptions(
+                height: 180.4, // Customize the height of the carousel
+                autoPlay: true, // Enable auto-play
+                enlargeCenterPage: true, // Increase the size of the center item
+                enableInfiniteScroll: true, // Enable infinite scroll
+                onPageChanged: (index, reason) {
+                  // Optional callback when the page changes
+                  // You can use it to update any additional UI components
+                },
+              )
+        )]
           ),
     )
     );

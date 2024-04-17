@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'dart:async'; 
 import 'package:table_calendar/table_calendar.dart';
 import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import 'event.dart';
 
