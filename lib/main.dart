@@ -13,10 +13,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 import 'event.dart';
 
-
+// imports for database 
 import 'package:flutter/widgets.dart';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:http/http.dart' as http; 
+import 'dart:convert' as convert;
 
 
 //Different parts, or "pages" of the web app - links to other dart files in this project

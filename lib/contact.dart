@@ -1,167 +1,5 @@
 part of 'main.dart'; 
 
-// // Database 
-// void contactMain() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // final database = openDatabase(
-  //   join(await getDatabasesPath(), 'clientele_database.db'),
-  //   onCreate: (db, version) {
-  //     return db.execute(
-  //       'CREATE TABLE clients(name TEXT, address TEXT, trim TEXT, phone TEXT, email TEXT, notes TEXT)',
-  //     );
-  //   },
-  //   version: 1,
-  // );
-
-  // Future<void> insertClient(Client client) async {
-
-  //   final db = await database;
-
-  //   await db.insert(
-  //     'clients',
-  //     client.toMap(),
-  //     conflictAlgorithm: ConflictAlgorithm.replace,
-  //   );
-  // }
-
-  // // A method that retrieves all the dogs from the dogs table.
-  // Future<List<Client>> clients() async {
-  //   // Get a reference to the database.
-  //   final db = await database;
-
-  //   // Query the table for all the dogs.
-  //   final List<Map<String, Object?>> clientMaps = await db.query('clients');
-
-  //   // Convert the list of each dog's fields into a list of `Dog` objects.
-  //   return [
-  //     for (final {
-  //           'name': name as String,
-  //           'address': address as String,
-  //           'trim': trim as String,
-  //           'phone': phone as String,
-  //           'email': email as String,
-  //           'notes': notes as String,
-  //         } in clientMaps)
-  //       Client(name: name, address: address, trim: trim, phone: phone, email: email, notes: notes),
-  //   ];
-  // }
-
-  // Future<void> updateClient(Client client) async {
-  //   // Get a reference to the database.
-  //   final db = await database;
-
-  //   // Update the given Dog.
-  //   await db.update(
-  //     'clients',
-  //     client.toMap(),
-  //     // Ensure that the Dog has a matching id.
-  //     where: 'name = ?',
-  //     // Pass the Dog's id as a whereArg to prevent SQL injection.
-  //     whereArgs: [client.name],
-  //   );
-  // }
-
-  // Future<void> deleteClient(name) async {
-  //   // Get a reference to the database.
-  //   final db = await database;
-
-  //   // Remove the Dog from the database.
-  //   await db.delete(
-  //     'clients',
-  //     // Use a `where` clause to delete a specific dog.
-  //     where: 'name = ?',
-  //     // Pass the Dog's id as a whereArg to prevent SQL injection.
-  //     whereArgs: [name],
-  //   );
-  // }
-
-  // // Create a Dog and add it to the dogs table
-  // var newerClient = Client(
-  //   name: 'Larry Jane',
-  //   address: '123 Magical Tree Street',
-  //   trim: 'January 20, 2024',
-  //   phone: '123-456-7890',
-  //   email: 'larryjane@email.com',
-  //   notes: 'This is just a random chunck of text to show how you can add notes to this webapp so additional information can be added for the client and user!!',
-  // );
-
-  // await insertClient(newerClient);
-
-  // // Now, use the method above to retrieve all the dogs.
-  // print(await clients()); // Prints a list that include Fido.
-
-  // // Update Fido's age and save it to the database.
-  // newerClient = Client(
-  //   name: 'Larry Jane',
-  //   address: '123 Magical Tree Street',
-  //   trim: 'April 12, 2024', 
-  //   phone: '123-456-7890',
-  //   email: 'larryjane@email.com',
-  //   notes: 'Words no longer needed!',
-  // );
-
-  // await updateClient(newerClient);
-
-  // // Print the updated results.
-  // print(await clients()); // Prints Fido with age 42.
-
-  // // Delete Fido from the database.
-  // await deleteClient(newerClient.name);
-
-  // // Print the list of dogs (empty).
-  // print(await clients());
-// }
-
-
-
-class Client {
-  final String name;
-  final String address;
-  final String trim;
-  final String phone;
-  final String email;
-  final String notes;
-
-  Client({
-    required this.name,
-    required this.address,
-    required this.trim,
-    required this.phone,
-    required this.email,
-    required this.notes,
-  }); 
-
-  // factory Client.fromMe(Map<String, dynamic> me) => Client(
-  //   name: me['name'],
-  //   address: me['address'], 
-  //   trim: me['trim'], 
-  //   phone: me['phone'], 
-  //   email: me['email'], 
-  //   notes: me['notes'], 
-  // );
-
-  Map<String, Object?> toMap() {
-    return {
-      'name': name,
-      'address': address,
-      'trim': trim,
-      'phone': phone, 
-      'email': email, 
-      'notes': notes, 
-    };
-  }
-
-  // Map<String, dynamic> toMe() => {
-  //   'name': name,
-  //   'address': address,
-  //   'trim': trim,
-  //   'phone': phone, 
-  //   'email': email, 
-  //   'notes': notes, 
-  // };
-}
-
-
 class ContactPage extends StatelessWidget {
   @override 
   Widget build(BuildContext context) {
@@ -230,6 +68,7 @@ class ContactPage extends StatelessWidget {
   //   )
   // );
 
+  // create a table with all the contact information of a client
   return Column(
     children: [
       Container(
@@ -537,17 +376,47 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
 
+  // set controllers for text input 
   final nameController = TextEditingController();
   final addressController = TextEditingController(); 
+  final trimController = TextEditingController(); 
   final phoneController = TextEditingController(); 
   final emailController = TextEditingController(); 
   final notesController = TextEditingController(); 
+
+  // database 
+  final _formKey = GlobalKey<FormState>();
+
+  void _submit() async{
+    if (_formKey.currentState!.validate()) { 
+
+      const String scriptURL = 'https://script.google.com/macros/s/AKfycbxpbOXdVs8W6_Js6S89gIuf4iiMyYC2WpfJ4TMekSYLA3kV48Sc1DvNFVVx4_ngekC9/exec';
+
+      String tempName = nameController.text;
+      String tempAddress = addressController.text;
+      String tempTrim = trimController.text;
+      String tempNotes = notesController.text;
+      String tempPhone = phoneController.text;
+      String tempEmail = emailController.text;
+
+      String queryString  = "?name=$tempName&address=$tempAddress&trim=$tempTrim&phone=$tempPhone&email=$tempEmail&notes=$tempNotes";
+
+      var finalURI = Uri.parse(scriptURL + queryString); 
+      var response = await http.get(finalURI);
+
+      if (response.statusCode == 200) {
+        var bodyR = convert.jsonDecode(response.body);
+        print(bodyR);
+      }
+    }
+  }
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
     nameController.dispose();
     addressController.dispose();
+    trimController.dispose();
     phoneController.dispose();
     emailController.dispose();
     notesController.dispose();
@@ -567,169 +436,153 @@ class _InputPageState extends State<InputPage> {
         appBar: AppBar(
           title: const Text(formTitle),
         ),
-        body: Center(
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              NameInputTitle(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter the name',
-                ),
-                controller: nameController,
-                ),
-              ), 
-              SizedBox(height: 16, width: 10,),
-              AdressInputTitle(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                child: TextField(
+        body: Form(
+          key: _formKey,
+          child: Center(
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                NameInputTitle(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  child: TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'Enter the address',
+                    hintText: 'Enter the name',
                   ),
-                  controller: addressController,
-                ),
-              ), 
-              SizedBox(height: 20, width: 10,),
-              PhoneInputTitle(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter the phone number',
+                  controller: nameController,
                   ),
-                  controller: phoneController,
-                ),
-              ), 
-              SizedBox(height: 20, width: 10,),
-              EmailInputTitle(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter the email',
+                ), 
+                SizedBox(height: 16, width: 10,),
+                AdressInputTitle(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == "") {
+                        return 'Enter a value';
+                      }
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter the address',
+                    ),
+                    controller: addressController,
                   ),
-                  controller: emailController,
-                ),
-              ), 
-              SizedBox(height: 20, width: 10,),
-              NotesInputTitle(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter some notes',
+                ), 
+                SizedBox(height: 16, width: 10,),
+                TrimInputTitle(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == "") {
+                        return 'Enter a value';
+                      }
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter the next appointment date',
+                    ),
+                    controller: trimController,
                   ),
-                  controller: notesController,
+                ), 
+                SizedBox(height: 20, width: 10,),
+                PhoneInputTitle(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == "") {
+                        return 'Enter a value';
+                      }
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter the phone number',
+                    ),
+                    controller: phoneController,
+                  ),
+                ), 
+                SizedBox(height: 20, width: 10,),
+                EmailInputTitle(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == "") {
+                        return 'Enter a value';
+                      }
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter the email',
+                    ),
+                    controller: emailController,
+                  ),
+                ), 
+                SizedBox(height: 20, width: 10,),
+                NotesInputTitle(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == "") {
+                        return 'Enter a value';
+                      }
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter some notes',
+                    ),
+                    controller: notesController,
+                  ),
+                ), 
+                SizedBox(height: 20, width: 10,),
+                ElevatedButton(
+                  onPressed: (){
+                    print('PURPLE');
+                    _submit();
+                  },
+                  child: Text('Save information')
                 ),
-              ), 
-              SizedBox(height: 20, width: 10,),
-              ElevatedButton(
-                onPressed: (){
-                  DatabaseHelper.insertClient(Client(name: nameController.text,
-                      address: addressController.text,
-                      trim: 'null', 
-                      phone: phoneController.text,
-                      email: emailController.text,
-                      notes: notesController.text,));
-
-                  print('PURPLE');
-
-                  // print(DatabaseHelper.clients()); 
-                },
-                child: Text('Save information')
-              ),
-              SizedBox(height: 20, width: 10,),
-              ElevatedButton(
-                onPressed: (){
-                  Navigator.pop(context);
-                },
-                child: Text('Return')
-              ),
-            ],
-          )
+                SizedBox(height: 20, width: 10,),
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
+                  child: Text('Return')
+                ),
+              ],
+            )
+          ),
         ),
       )
     );
   } 
 } 
 
+class TrimInputTitle extends StatelessWidget {
+  const TrimInputTitle({
+    super.key,
+  });
 
+  @override
+  Widget build(BuildContext context) {
+     final theme = Theme.of(context);
+    final style = theme.textTheme.titleLarge!.copyWith(
+      color: Color.fromRGBO(108, 129, 88, 1),
+    );
 
-class DatabaseHelper{
-  static const String _dbName = 'clientele_database.db';
-
-  static Future<Database> _getDB() async {
-    print('ARGGGGGG');
-    
-  //   return openDatabase(join(await getDatabasesPath(), _dbName),
-  //     onCreate: (db, version) async => await db.execute(
-  //       'CREATE TABLE clients(name TEXT, address TEXT, trim TEXT, phone TEXT, email TEXT, notes TEXT)'),
-  //   version: 1,
-  //   ); 
-  // } 
-
-    final String path = join(await getDatabasesPath(), _dbName); 
-     
-    print('MARCH');
-  
-    return openDatabase(
-      path,
-      onCreate: (db, version) async {
-        await db.execute(
-          'CREATE TABLE clients(name TEXT, address TEXT, trim TEXT, phone TEXT, email TEXT, notes TEXT)',
-        );
-      },
-      version: 1,
-    ); 
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      child: Align( 
+        alignment: Alignment.bottomLeft,
+        child: Text('Next appointment', style: style),
+      )
+    );
   }
-
-  static Future<void> insertClient(Client client) async {
-    print('BURNNNN'); 
-
-    final db = await _getDB(); 
-
-    print('gotted');
-
-    // return await db.insert(
-    //   "Client", client.toMe(),
-    //   conflictAlgorithm: ConflictAlgorithm.replace
-    //   );
-
-    await db.insert(
-      'clients',
-      client.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    ); 
-
-    print('YELLOW'); 
-  }
-
-   static Future<List<Client>> clients() async {
-    final db = await _getDB();
-    final List<Map<String, Object?>> clientMaps = await db.query('clients');
-    return [
-      for (final {
-            'name': name as String,
-            'address': address as String,
-            'trim': trim as String,
-            'phone': phone as String,
-            'email': email as String,
-            'notes': notes as String,
-          } in clientMaps)
-        Client(name: name, address: address, trim: trim, phone: phone, email: email, notes: notes),
-    ];
-  }
-
 }
-
 
 class NotesInputTitle extends StatelessWidget {
   const NotesInputTitle({
@@ -741,7 +594,6 @@ class NotesInputTitle extends StatelessWidget {
      final theme = Theme.of(context);
     final style = theme.textTheme.titleLarge!.copyWith(
       color: Color.fromRGBO(108, 129, 88, 1),
-      // fontWeight: FontWeight.bold, 
     );
 
     return Padding(
@@ -764,7 +616,6 @@ class EmailInputTitle extends StatelessWidget {
      final theme = Theme.of(context);
     final style = theme.textTheme.titleLarge!.copyWith(
       color: Color.fromRGBO(108, 129, 88, 1),
-      // fontWeight: FontWeight.bold, 
     );
 
     return Padding(
@@ -787,7 +638,6 @@ class PhoneInputTitle extends StatelessWidget {
      final theme = Theme.of(context);
     final style = theme.textTheme.titleLarge!.copyWith(
       color: Color.fromRGBO(108, 129, 88, 1),
-      // fontWeight: FontWeight.bold, 
     );
 
     return Padding(
@@ -811,7 +661,6 @@ class AdressInputTitle extends StatelessWidget {
      final theme = Theme.of(context);
     final style = theme.textTheme.titleLarge!.copyWith(
       color: Color.fromRGBO(108, 129, 88, 1),
-      // fontWeight: FontWeight.bold, 
     );
 
     return Padding(
@@ -834,7 +683,6 @@ class NameInputTitle extends StatelessWidget {
      final theme = Theme.of(context);
     final style = theme.textTheme.titleLarge!.copyWith(
       color: Color.fromRGBO(108, 129, 88, 1),
-      // fontWeight: FontWeight.bold, 
     );
 
     return Padding(
