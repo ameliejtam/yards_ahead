@@ -72,11 +72,11 @@ class ContactPage extends StatelessWidget {
   return Column(
     children: [
       Container(
+        // design of contact page 
         decoration: BoxDecoration(
           border: Border.all(width: 3, color: Color.fromRGBO(211, 222, 188, 1)),
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
-        // alignment: Alignment.topCenter,
         child: Table(
           border: TableBorder.all(color: Color.fromRGBO(243, 251, 236, 1)),
           columnWidths: const <int, TableColumnWidth>{
@@ -87,6 +87,7 @@ class ContactPage extends StatelessWidget {
           },
           defaultVerticalAlignment: TableCellVerticalAlignment.top,
           children: <TableRow>[
+            // display client name 
             TableRow(
               children: [
                 Name(),
@@ -96,6 +97,7 @@ class ContactPage extends StatelessWidget {
                 SizedBox(height: 10, width: 10,),
                 ]
             ),
+            // display the subheadings of client info 
             TableRow(
               children:[
                 AddressTitle(), 
@@ -105,6 +107,7 @@ class ContactPage extends StatelessWidget {
                 NotesTitle(), 
               ],
             ),
+            // display personalised client info 
             TableRow(
               children: [
                 Address(),
@@ -117,6 +120,7 @@ class ContactPage extends StatelessWidget {
           ],
         ),
       ),
+      // button to add a contact
       Expanded(
           child: Align(
             alignment: Alignment(0.9, 0.9),
@@ -166,6 +170,7 @@ class ContactPage extends StatelessWidget {
   }
 }
 
+// all the designs for the text in the table 
 class Email extends StatelessWidget {
   const Email({
     super.key,
@@ -262,7 +267,7 @@ class NextTrim extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-      child: Text('January 20, 2024'),
+      child: Text('May 2, 2024'),
     );
   }
 }
@@ -280,7 +285,6 @@ class Address extends StatelessWidget {
     );
   }
 }
-
 
 class Name extends StatelessWidget {
   const Name({
@@ -302,7 +306,6 @@ class Name extends StatelessWidget {
   }
 }
 
-
 class AddressTitle extends StatelessWidget {
   const AddressTitle({
     super.key,
@@ -322,7 +325,6 @@ class AddressTitle extends StatelessWidget {
     );
   }
 }
-
 
 class NextTrimTitle extends StatelessWidget {
   const NextTrimTitle({
@@ -344,7 +346,6 @@ class NextTrimTitle extends StatelessWidget {
   }
 }
 
-
 class NotesTitle extends StatelessWidget {
   const NotesTitle({
     super.key,
@@ -365,8 +366,6 @@ class NotesTitle extends StatelessWidget {
   }
 }
 
-
-
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
   @override
@@ -374,6 +373,7 @@ class InputPage extends StatefulWidget {
 }
 
 
+// input new client information 
 class _InputPageState extends State<InputPage> {
 
   // set controllers for text input 
@@ -384,9 +384,10 @@ class _InputPageState extends State<InputPage> {
   final emailController = TextEditingController(); 
   final notesController = TextEditingController(); 
 
-  // database 
+  // key for the database 
   final _formKey = GlobalKey<FormState>();
 
+  // add info to database 
   void _submit() async{
     if (_formKey.currentState!.validate()) { 
 
@@ -423,10 +424,11 @@ class _InputPageState extends State<InputPage> {
     super.dispose();
   }
 
-
+  // create the layout of the client info input page 
   @override
   Widget build(BuildContext context) {
     const formTitle = 'Contact Information';
+    // design 
     return MaterialApp(
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(243, 251, 236, 1)),
@@ -440,8 +442,8 @@ class _InputPageState extends State<InputPage> {
           key: _formKey,
           child: Center(
             child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // client name 
                 NameInputTitle(),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -453,7 +455,8 @@ class _InputPageState extends State<InputPage> {
                   controller: nameController,
                   ),
                 ), 
-                SizedBox(height: 16, width: 10,),
+                SizedBox(height: 16, width: 10,), 
+                // client address 
                 AdressInputTitle(),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -471,6 +474,7 @@ class _InputPageState extends State<InputPage> {
                   ),
                 ), 
                 SizedBox(height: 16, width: 10,),
+                // client next trimming appointment 
                 TrimInputTitle(),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -488,6 +492,7 @@ class _InputPageState extends State<InputPage> {
                   ),
                 ), 
                 SizedBox(height: 20, width: 10,),
+                // client phone number 
                 PhoneInputTitle(),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -505,6 +510,7 @@ class _InputPageState extends State<InputPage> {
                   ),
                 ), 
                 SizedBox(height: 20, width: 10,),
+                // client email 
                 EmailInputTitle(),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -521,7 +527,8 @@ class _InputPageState extends State<InputPage> {
                     controller: emailController,
                   ),
                 ), 
-                SizedBox(height: 20, width: 10,),
+                SizedBox(height: 20, width: 10,), 
+                // additional notes on the client 
                 NotesInputTitle(),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -539,14 +546,16 @@ class _InputPageState extends State<InputPage> {
                   ),
                 ), 
                 SizedBox(height: 20, width: 10,),
+                // button that submits the data to the database 
                 ElevatedButton(
                   onPressed: (){
-                    print('PURPLE');
                     _submit();
+                    Navigator.pop(context);
                   },
                   child: Text('Save information')
                 ),
                 SizedBox(height: 20, width: 10,),
+                // button that returns user to contact page (without saving info)
                 ElevatedButton(
                   onPressed: (){
                     Navigator.pop(context);
@@ -562,6 +571,7 @@ class _InputPageState extends State<InputPage> {
   } 
 } 
 
+// design for all the text in the input page 
 class TrimInputTitle extends StatelessWidget {
   const TrimInputTitle({
     super.key,
@@ -649,7 +659,6 @@ class PhoneInputTitle extends StatelessWidget {
     );
   }
 }
-
 
 class AdressInputTitle extends StatelessWidget {
   const AdressInputTitle({
