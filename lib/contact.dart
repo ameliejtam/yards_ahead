@@ -550,7 +550,6 @@ class _InputPageState extends State<InputPage> {
                 ElevatedButton(
                   onPressed: (){
                     _submit();
-                    Navigator.pop(context);
                   },
                   child: Text('Save information')
                 ),
