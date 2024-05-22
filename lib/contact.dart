@@ -251,7 +251,7 @@ class Notes extends StatelessWidget {
       // color: Colors.blue,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-        child: Flexible(child: Text('This is just a random chunck of text to show how you can add notes to this webapp so additional information can be added for the client and user!!'),
+        child: Flexible(child: Text('This is just a random chunk of text to show how you can add notes to this webapp so additional information can be added for the client and user!!'),
         ),
       ),
     );
