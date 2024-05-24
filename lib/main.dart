@@ -1,19 +1,22 @@
 //Import packages for functionality purposes later on in the code
-// import 'dart:html';
 
+//Package to use dart language + basic dart programming functionality
 import 'dart:html';
-
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:async'; 
+
+//Package to implement calendar UI
 import 'package:table_calendar/table_calendar.dart';
+
+//Package to implement maps UI
 import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
+
+//Package to implement carousel slider on the home page
 import 'package:carousel_slider/carousel_slider.dart';
 
-import 'event.dart';
-
-// imports for database 
+//Packages + imports to use the database 
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http; 
 import 'dart:convert' as convert;

@@ -2,34 +2,36 @@ part of 'main.dart';
 
 class CalendarPage extends StatefulWidget {
     @override
+    //Initialize an additional page for the calendar
     State<CalendarPage> createState() => _CalendarPageState();
 }
 
 
 class _CalendarPageState extends State<CalendarPage> {
-  //CHANGE
+  //Set default calendar format to month
   CalendarFormat _calendarFormat = CalendarFormat.month;
-  // Create variable called "_focusedDay" to store the date and time of today
+  //Initialize private variable called "_focusedDay" to store the date for today
   DateTime _focusedDay = DateTime.now();
+  //Initialize private variable called "_selectedDay" to store the date that the user clicked on
   DateTime? _selectedDay;
-  //Store the events that were created
+  //Initialize dictionary called "events" to store the date and title information for created events (dictionaries are called "Maps" in Dart)
   Map<DateTime, List<String>> events = {};
-  //Create text input to input event name
+  //Initialize a text input controller called "_eventController" to allow the user to input the event name
   TextEditingController _eventController = TextEditingController();
-  //Add a list to display the events on a given day
-  //By using the "ValueNotifier" function, the list will refresh every time a new event is added
+  //Use the "ValueNotifier" function to notify other parts of the program when a new event is added
   late final ValueNotifier<List<String>> _selectedEvents;
 
-  //Initialize variables 
+  //Instance method to set up calendar display 
   @override
   void initState() {
     super.initState();
+    //Set the day that is being selected on the calendar as the day today
     _selectedDay = _focusedDay;
-    //Variable to store a list of events in the calendar
-    //GetEvents will store a DateTime variable, and through this it will retrieve events from a certain given day
+    //Notify program to retrieve events for a given day when a new day has been selected
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
   }
 
+  //"dispose" method to optimize resource use (get rid of no-longer-used resources in widgets)
   @override 
   void dispose() {
     super.dispose();
@@ -38,11 +40,13 @@ class _CalendarPageState extends State<CalendarPage> {
   //Create function _getEventsForDay to retrieve events for a given day
   //Function should return a list of events for a given day
   List<String> _getEventsForDay(DateTime day){
-    //Return the events that take place on the given day
+    //Return a list of the events that take place on the given day
     return events[day] ?? [];
   }
   
+  //Function to keep program display up-to-date with the day that the user has clicked on
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+    //If the day that the user has clicked on in the calendar does not match the value of the private variables the program used to store the selected day and focused day, change those private variables to match what the user is currently clicking on
     if (!isSameDay(_selectedDay, selectedDay)) {
       setState(() {
         _selectedDay = selectedDay;
@@ -53,17 +57,21 @@ class _CalendarPageState extends State<CalendarPage> {
     }
   }
 
+  //Widget to display the calendar and allow the user to add events to the calendar
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //Create the calendar title and subtitle
       //Center the title
       appBar: AppBar(
         title: Center(
           child: Text("Clients Calendar"),
         ),
       ),
+      //ADD NEW EVENTS FEATURE:
       //Create button to add new events
       floatingActionButton: FloatingActionButton(
+        //When button is pressed, open a box on the screen with a place where the user can enter the name of their event
         onPressed: () {
           //Dialogue to tell user to input an event name
           showDialog(
@@ -74,9 +82,8 @@ class _CalendarPageState extends State<CalendarPage> {
                 title: Text("Event Name"),
                 content: Padding(
                   padding: EdgeInsets.all(8),
-                  //Get text input from the user
+                  //Get text input from the user using the text input controller created previously
                   child:TextField(
-                    //Set controller to the text input controller created previously
                     controller: _eventController,
                   ),
                 ),
@@ -84,43 +91,42 @@ class _CalendarPageState extends State<CalendarPage> {
                 actions: [
                   ElevatedButton(
                     onPressed: () {
-                    //Use the calendar's addEvents function to add submitted events to the selected day
-                    events.addAll({
-                      _selectedDay!: [_eventController.text]
-                    });
-                    //Exit the adding events pop-up
-                    Navigator.of(context).pop();
-                    //Display the event on the screen
-                    _selectedEvents.value = _getEventsForDay(_selectedDay!);
-                  }, 
+                      //When the submit button is pressed, add submitted events to the selected day in the events dictionary in the form of a key:value pair
+                      events.addAll({
+                        _selectedDay!: [_eventController.text]
+                      });
+                      //Exit the adding events pop-up
+                      Navigator.of(context).pop();
+                      //Display the event on the screen
+                      _selectedEvents.value = _getEventsForDay(_selectedDay!);
+                    }, 
+                  //Set submit button text
                   child: Text("Submit"),
                   )
                 ],
               );
             });
         }, 
+        // Set an icon for the add events button
         child: Icon(Icons.add),
       ),
+      //CALENDAR DISPLAY
       body: Column(
         children: [
           Center(
-            child: Text("Click on days to add events and click on already-added events to edit them!"),
+            child: Text("Click on days to add events!"),
           ),
+          //Use TableCalendar widget to create a calendar
           TableCalendar(
-            //Set "_focusedDay" as focusedDay so that calendar always opens up to the current day
+            //Set focusedDay as "_focusedDay" so that calendar always opens up to the current day
             focusedDay: _focusedDay,
+            //Range of calendar display pages
             firstDay: DateTime.utc(2024, 3, 1),
-            lastDay: DateTime.utc(2025, 3, 1),
-            //Highlight a selected day
+            lastDay: DateTime.utc(2095, 3, 1),
+            //Highlight the selected day
             selectedDayPredicate: (day) {
               return isSameDay(_selectedDay, day);
             },
-            // onDaySelected: (selectedDay, focusedDay) {
-            //   setState(() {
-            //     _selectedDay = selectedDay;
-            //     today = focusedDay; 
-            //   });
-            // },
             onDaySelected: _onDaySelected,
             //Load events into calendar
             eventLoader: _getEventsForDay,
@@ -131,13 +137,10 @@ class _CalendarPageState extends State<CalendarPage> {
                 _calendarFormat = format;
               });
             },
-            // eventLoader: (day) {
-            //   return _getEventsForDay(day);
-            // },
           ),
           SizedBox(height: 8.0),
           Expanded(
-            //Create list to display table calendar elements below the table
+            //Create list to display events below the table
             child: ValueListenableBuilder<List<String>>(
               valueListenable: _selectedEvents, 
               builder: (context, value, _) {
@@ -154,6 +157,7 @@ class _CalendarPageState extends State<CalendarPage> {
                       //Display title of event
                       child: 
                       ListTile(
+                        //Command that runs when user taps an event in the list (will be programmed to allow the user to edit events later!)
                         onTap: () => print(""), 
                         title: Text('${value[index]}'),
                       ),
