@@ -44,6 +44,7 @@ class _CalendarPageState extends State<CalendarPage> {
     return events[day] ?? [];
   }
   
+  //This function was adapted from source [2]
   //Function to keep program display up-to-date with the day that the user has clicked on
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     //If the day that the user has clicked on in the calendar does not match the value of the private variables the program used to store the selected day and focused day, change those private variables to match what the user is currently clicking on
@@ -70,6 +71,7 @@ class _CalendarPageState extends State<CalendarPage> {
       ),
       //ADD NEW EVENTS FEATURE:
       //Create button to add new events
+      //This code was adapted from source [2]
       floatingActionButton: FloatingActionButton(
         //When button is pressed, open a box on the screen with a place where the user can enter the name of their event
         onPressed: () {
@@ -141,6 +143,7 @@ class _CalendarPageState extends State<CalendarPage> {
           SizedBox(height: 8.0),
           Expanded(
             //Create list to display events below the table
+            //This section of the code was adapted from source [2]
             child: ValueListenableBuilder<List<String>>(
               valueListenable: _selectedEvents, 
               builder: (context, value, _) {
