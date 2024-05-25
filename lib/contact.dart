@@ -1,83 +1,22 @@
+// an extension of the main file
 part of 'main.dart'; 
 
+// create the contact page 
 class ContactPage extends StatelessWidget {
   @override 
   Widget build(BuildContext context) {
-    // var appState = context.watch<MyAppState>();
-
-    // if (appState.favorites.isEmpty) {
-    // return Center(
-    //   child: Text('Contact page'),
-    // );
-  // }
-
-  // return ListView(
-  //   children: [
-  //     Padding(
-  //       padding: const EdgeInsets.all(20),
-  //       child: Text('You have ' '${appState.favorites.length} favorites:'),
-  //     ),
-  //     for (var pair in appState.favorites)
-  //       ListTile(
-  //         leading: Icon(Icons.favorite),
-  //         title: Text(pair.asLowerCase),
-  //       )
-  //     ],
-  //   );
-
-  // return Center(
-  //   child: Column(
-  //     mainAxisAlignment: MainAxisAlignment.start,
-  //     children: [
-  //       Name(),
-  //       Row(
-  //         mainAxisSize: MainAxisSize.min,
-  //         children: [
-  //           AddressTitle(), 
-  //           SizedBox(width:60),
-  //           NextTrimTitle(), 
-  //           SizedBox(width: 60),
-  //           NotesTitle(), 
-  //         ],
-  //       ),
-  //       Row(
-  //         mainAxisSize: MainAxisSize.min,
-  //         children: [
-  //           Address(),
-  //           SizedBox(width:60),
-  //           NextTrim(), 
-  //           SizedBox(width: 60),
-  //           Notes(), 
-  //         ],
-  //       ),
-  //       Expanded(
-  //         child: Align(
-  //           alignment: Alignment(0.9, 0.9),
-  //           child: FloatingActionButton(
-  //             onPressed: () {
-  //             Navigator.push(
-  //               context,
-  //               MaterialPageRoute(builder :(context) => const InputPage()),
-  //             );
-  //             },
-  //             child: Text('+', style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2.5),),
-  //             ),
-  //           ),
-  //       ),
-  //     ],
-  //   )
-  // );
-
   // create a table with all the contact information of a client
   return Column(
     children: [
       Container(
-        // design of contact page 
+        // design of the table, including border colour and curved corners 
         decoration: BoxDecoration(
           border: Border.all(width: 3, color: Color.fromRGBO(211, 222, 188, 1)),
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
+        // the following code that creates the table is modified from source [10]
         child: Table(
+          // set a width for the table columns 
           border: TableBorder.all(color: Color.fromRGBO(243, 251, 236, 1)),
           columnWidths: const <int, TableColumnWidth>{
               0: FixedColumnWidth(180),
@@ -91,6 +30,7 @@ class ContactPage extends StatelessWidget {
             TableRow(
               children: [
                 Name(),
+                // a sized box is an empty box that often creates space between widgets
                 SizedBox(height: 10, width: 10,),
                 SizedBox(height: 10, width: 10,),
                 SizedBox(height: 10, width: 10,),
@@ -124,6 +64,7 @@ class ContactPage extends StatelessWidget {
       Expanded(
           child: Align(
             alignment: Alignment(0.9, 0.9),
+            // the following code that switches the page when a button is clicked was modified from source [11]
             child: FloatingActionButton(
               onPressed: () {
               Navigator.push(
@@ -137,68 +78,10 @@ class ContactPage extends StatelessWidget {
         ),
     ],
   );
-  
-  // return Center(
-  //     child: Column(
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       children: [
-  //         contactInfo(pair: pair),
-  //         SizedBox(height: 10),
-  //         Row(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             ElevatedButton.icon(
-  //               onPressed: () {
-  //                 appState.toggleFavorite();
-  //               },
-  //               icon: Icon(icon),
-  //               label: Text('Like'),
-  //             ),
-  //             SizedBox(width: 10),
-  //             ElevatedButton(
-  //               onPressed: () {
-  //                 appState.getNext();
-  //               },
-  //               child: Text('Next'),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-
   }
 }
 
-// all the designs for the text in the table 
-class Email extends StatelessWidget {
-  const Email({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-      child: Text('larryjane@email.com'),
-    );
-  }
-}
-
-class Phone extends StatelessWidget {
-  const Phone({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-      child: Text('123-456-7890'),
-    );
-  }
-}
-
+// all the designs and text for the subheadings in the table 
 class EmailTitle extends StatelessWidget {
   const EmailTitle({
     super.key,
@@ -206,7 +89,7 @@ class EmailTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final theme = Theme.of(context); 
     final style = theme.textTheme.titleMedium!.copyWith(
       color: Color.fromRGBO(108, 129, 88, 1),
       fontWeight: FontWeight.bold, 
@@ -235,73 +118,6 @@ class PhoneTitle extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text('Phone', style: style),
-    );
-  }
-}
-
-class Notes extends StatelessWidget {
-  const Notes({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 400, 
-      // color: Colors.blue,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-        child: Flexible(child: Text('This is just a random chunk of text to show how you can add notes to this webapp so additional information can be added for the client and user!!'),
-        ),
-      ),
-    );
-  }
-}
-
-class NextTrim extends StatelessWidget {
-  const NextTrim({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-      child: Text('May 2, 2024'),
-    );
-  }
-}
-
-class Address extends StatelessWidget {
-  const Address({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-      child: Text('123 Magical Tree Street'),
-    );
-  }
-}
-
-class Name extends StatelessWidget {
-  const Name({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final style = theme.textTheme.headlineSmall!.copyWith(
-      color: Color.fromRGBO(108, 129, 88, 1),
-      fontWeight: FontWeight.bold, 
-    );
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text('Larry Jane', style: style),
     );
   }
 }
@@ -366,17 +182,113 @@ class NotesTitle extends StatelessWidget {
   }
 }
 
+// all the designs and text for specific information on the client within the table 
+class Email extends StatelessWidget {
+  const Email({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+      child: Text('larryjane@email.com'),
+    );
+  }
+}
+
+class Phone extends StatelessWidget {
+  const Phone({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+      child: Text('123-456-7890'),
+    );
+  }
+}
+
+class Notes extends StatelessWidget {
+  const Notes({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 400, 
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0), 
+        child: Flexible(child: Text('This is just a random chunk of text to show how you can add notes to this webapp so additional information can be added for the client and user!!'),
+        ),
+      ),
+    );
+  }
+}
+
+class NextTrim extends StatelessWidget {
+  const NextTrim({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+      child: Text('May 2, 2024'),
+    );
+  }
+}
+
+class Address extends StatelessWidget {
+  const Address({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+      child: Text('123 Magical Tree Street'),
+    );
+  }
+}
+
+class Name extends StatelessWidget {
+  const Name({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final style = theme.textTheme.headlineSmall!.copyWith(
+      color: Color.fromRGBO(108, 129, 88, 1),
+      fontWeight: FontWeight.bold, 
+    );
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text('Larry Jane', style: style),
+    );
+  }
+}
+
+// class for the input page where information can be added for a new client 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
   @override
   State<InputPage> createState() => _InputPageState(); 
 }
 
-
 // input new client information 
 class _InputPageState extends State<InputPage> {
 
-  // set controllers for text input 
+  // set controllers for text input (controllers help to access the information that was recently inputed, they aren't currently used due to time restrictions in allowing further coding progress)
+  // this code was modified from source [12]
   final nameController = TextEditingController();
   final addressController = TextEditingController(); 
   final trimController = TextEditingController(); 
@@ -387,7 +299,7 @@ class _InputPageState extends State<InputPage> {
   // key for the database 
   final _formKey = GlobalKey<FormState>();
 
-  // add info to database 
+  // add info to database, funciton modified from source [15]
   void _submit() async{
     if (_formKey.currentState!.validate()) { 
 
@@ -414,7 +326,7 @@ class _InputPageState extends State<InputPage> {
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
+    // Clean up the controller when the widget is disposed, modified from source [13]
     nameController.dispose();
     addressController.dispose();
     trimController.dispose();
@@ -428,7 +340,7 @@ class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     const formTitle = 'Contact Information';
-    // design 
+    // set the colour scheme and background colour of the input page  
     return MaterialApp(
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(243, 251, 236, 1)),
@@ -437,16 +349,18 @@ class _InputPageState extends State<InputPage> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text(formTitle),
-        ),
+        ), 
+        // form allows for a text input page layout 
         body: Form(
           key: _formKey,
           child: Center(
             child: Column(
               children: [
-                // client name 
+                // client name subheading
                 NameInputTitle(),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  // the following function designs a user input box and takes in user input, and was modified from source [13]
                   child: TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -456,16 +370,20 @@ class _InputPageState extends State<InputPage> {
                   ),
                 ), 
                 SizedBox(height: 16, width: 10,), 
-                // client address 
+                // client address subheading 
                 AdressInputTitle(),
+                // user input for client adress 
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  // following function takes in user input 
                   child: TextFormField(
+                    // promts the user to enter a value if no value was originally inptued, modifed from source [14]
                     validator: (value) {
                       if (value == "") {
                         return 'Enter a value';
                       }
-                    },
+                    }, 
+                    // design of the input box 
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Enter the address',
@@ -474,16 +392,20 @@ class _InputPageState extends State<InputPage> {
                   ),
                 ), 
                 SizedBox(height: 16, width: 10,),
-                // client next trimming appointment 
+                // client next trimming appointment subheading 
                 TrimInputTitle(),
+                // user input for next trimming appointment 
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  // take user input 
                   child: TextFormField(
+                    // promts the user to enter a value if no value was originally inptued, modifed from source [14]
                     validator: (value) {
                       if (value == "") {
                         return 'Enter a value';
                       }
                     },
+                    // design of the input box 
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Enter the next appointment date',
@@ -492,16 +414,20 @@ class _InputPageState extends State<InputPage> {
                   ),
                 ), 
                 SizedBox(height: 20, width: 10,),
-                // client phone number 
+                // client phone number subheading
                 PhoneInputTitle(),
+                // user input for the client phone number 
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  // take user input 
                   child: TextFormField(
+                    // promts the user to enter a value if no value was originally inptued, modifed from source [14]
                     validator: (value) {
                       if (value == "") {
                         return 'Enter a value';
                       }
                     },
+                    // design of the input box 
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Enter the phone number',
@@ -510,16 +436,20 @@ class _InputPageState extends State<InputPage> {
                   ),
                 ), 
                 SizedBox(height: 20, width: 10,),
-                // client email 
+                // client email subheading
                 EmailInputTitle(),
+                // user input for the client email
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  // take user input 
                   child: TextFormField(
+                    // promts the user to enter a value if no value was originally inptued, modifed from source [14]
                     validator: (value) {
                       if (value == "") {
                         return 'Enter a value';
                       }
                     },
+                    // design of the input box 
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Enter the email',
@@ -530,14 +460,18 @@ class _InputPageState extends State<InputPage> {
                 SizedBox(height: 20, width: 10,), 
                 // additional notes on the client 
                 NotesInputTitle(),
+                // user input for notes on the client  
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  // take user input 
                   child: TextFormField(
+                    // promts the user to enter a value if no value was originally inptued, modifed from source [14]
                     validator: (value) {
                       if (value == "") {
                         return 'Enter a value';
                       }
                     },
+                    // design of the input box 
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Enter some notes',
@@ -554,7 +488,7 @@ class _InputPageState extends State<InputPage> {
                   child: Text('Save information')
                 ),
                 SizedBox(height: 20, width: 10,),
-                // button that returns user to contact page (without saving info)
+                // button that returns user to contact page (without saving info), modified from source [11]
                 ElevatedButton(
                   onPressed: (){
                     Navigator.pop(context);
@@ -570,7 +504,7 @@ class _InputPageState extends State<InputPage> {
   } 
 } 
 
-// design for all the text in the input page 
+// design for all the text in the input page, including colour, text size and text alignment 
 class TrimInputTitle extends StatelessWidget {
   const TrimInputTitle({
     super.key,
@@ -702,35 +636,5 @@ class NameInputTitle extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-// class contactInfo extends StatelessWidget {
-//   const contactInfo({
-//     super.key,
-//     required this.pair,
-//   });
-
-//   final WordPair pair;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final theme = Theme.of(context);
-//     final style = theme.textTheme.displayMedium!.copyWith(
-//       color: Color.fromRGBO(108, 129, 88, 1),
-//     );
-
-//     return Card(
-//       color: Color.fromRGBO(164, 195, 133, 1),
-//       child: Padding(
-//         padding: const EdgeInsets.all(20),
-//         child: Text(pair.asPascalCase, style: style),
-//       ),
-//     );
-  // }
-// }
 
 
