@@ -51,32 +51,14 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(243, 251, 236, 1)),
           scaffoldBackgroundColor: const Color.fromRGBO(243, 251, 236, 1), 
         ),
-        home: SplashScreen(),
+        home: SplashScreen(),//set first default to splashscreen
       ),
     );
   }
 }
 
 class MyAppState extends ChangeNotifier {
-  var current = WordPair.random();
-
-  void getNext() {
-    current = WordPair.random(); 
-    notifyListeners();
-  } 
-
-  // like button saving favourite words 
-  var favorites = <WordPair>[];
-
-  void toggleFavorite() {
-    if (favorites.contains(current)) {
-      favorites.remove(current);
-    } 
-    else {
-      favorites.add(current);
-    }
-    notifyListeners(); 
-  }
+  
 }
 
 
@@ -85,11 +67,12 @@ class SplashScreen extends StatefulWidget {
 _SplashScreenState createState() => _SplashScreenState(); 
 } //homepage create a state
 
+//Splashscreen functionality, general formatting taken from source [16]
 class _SplashScreenState extends State<SplashScreen> { 
 @override 
 void initState() { 
 	super.initState(); 
-	Timer(Duration(seconds: 1), //timer, splashscreen lasts 3 seconds
+	Timer(Duration(seconds: 3), //timer, splashscreen lasts 3 seconds
 		()=>Navigator.pushReplacement(this.context, 
 										MaterialPageRoute(builder: 
 														(context) => 
@@ -99,21 +82,22 @@ void initState() {
 		); 
 } 
 
+//buidling the splash screen interface
 @override 
 Widget build(BuildContext context) { 
 	return Container( 
 	color: Color.fromARGB(255, 180, 196, 142), 
-	child:Image.asset("assets/images/unnamed.png")
+	child:Image.asset("assets/images/unnamed.png") //Draw logo image from assets folder with seperate color
 	); 
 } 
 } 
 
 class HomePage extends StatefulWidget {
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();//creating state for homepage
 }
 
-
+//Functionality for the hamburger menu, listed pages are found in seperate files
 class _HomePageState extends State<HomePage> {
   int _selectedTab = 0;
 
@@ -138,6 +122,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+//Creating the user interface for the hamburger menu
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,18 +1,18 @@
 # Yards Ahead
 
-A new Flutter project.
 
 ## Features
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
 
 ## Installation
+- Please see...
 
 ## Known Bugs
+- Contact info does not display upon submission on the contact page
+- Client information does not save
 
 ## Support
+- Please contact developpers Christina Zhou, Chloe Wei, Amelie Tam with questions
 
 ## Sources
 - [1] “Creating a flutter app with a google sheets database,” YouTube, https://www.youtube.com/watch?v=iZPICyh05wU (accessed May 24, 2024). 
@@ -30,4 +30,15 @@ A few resources to get you started if this is your first Flutter project:
 - [13] “Create and style a text field,” Flutter, https://docs.flutter.dev/cookbook/forms/text-input (accessed May 24, 2024). 
 - [14] “Create and style a text field,” Flutter, https://docs.flutter.dev/cookbook/forms/validation (accessed May 24, 2024).   
 - [15] R. Verma, “How to store data in Google Sheets using flutter?,” Rajiv Verma, https://rajivverma.me/blog/tech/store-data-google-sheets-flutter/ (accessed May 25, 2024). 
+
+
+- [16] “GeeksforGeeks | A computer science portal for geeks,” GeeksforGeeks, 2019. https://www.geeksforgeeks.org/splash-screen-in-flutter/  (accessed May 26, 2024).
+- [17] R. D. Lio, “Getting Started with Flutter Map,” Medium, Feb. 27, 2024. https://raphaeldelio.medium.com/getting-started-with-flutter-map-9cf4113f22e9 (accessed May 26, 2024).
+- [18] “location_picker_flutter_map | Flutter package,” Dart packages. https://pub.dev/packages/location_picker_flutter_map (accessed May 26, 2024).
+- [19] N. Sehan, “Carousel Slider in Flutter,” Medium, Jul. 22, 2023. https://medium.com/@nishal.sehan/carousel-slider-in-flutter-660e9ca4b155 (accessed May 26, 2024).
+‌
+‌
+‌##images
+- [1]R. P. Inc, “Evergreen Shrubs: Pros and Cons – Gardening Tips,” www.rootwell.com, Jun. 06, 2018. https://www.rootwell.com/blogs/evergreen-shrubs
+‌
 
