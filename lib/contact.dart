@@ -1,4 +1,4 @@
-// an extension of the main file
+// an extension of the main.dart file
 part of 'main.dart'; 
 
 // create the contact page 

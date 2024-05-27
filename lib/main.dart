@@ -21,8 +21,7 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http; 
 import 'dart:convert' as convert;
 
-
-//Different parts, or "pages" of the web app - links to other dart files in this project
+//Different parts, or "pages" of the web app - links to other dart files in this project to organize the code 
 part 'contact.dart';
 part 'home.dart';
 part 'map.dart';
